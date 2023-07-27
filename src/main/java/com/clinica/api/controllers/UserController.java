@@ -1,9 +1,8 @@
 package com.clinica.api.controllers;
 
-import com.clinica.api.dto.UserDTO;
-import com.clinica.api.entities.User;
 import com.clinica.api.dto.LoginRequest;
 import com.clinica.api.dto.LoginResponse;
+import com.clinica.api.dto.UserDTO;
 import com.clinica.api.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.clinica.api.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.time.Instant;
 @Service
 public class JwtTokenService {
 
-    private static final Duration JWT_TOKEN_VALIDITY = Duration.ofHours(12);
+    private Duration tokenValidity = Duration.ofHours(12);
 
     private final Algorithm hmac512;
     private final JWTVerifier verifier;
@@ -30,7 +29,7 @@ public class JwtTokenService {
                 .withSubject(email)
                 .withIssuer("app")
                 .withIssuedAt(now)
-                .withExpiresAt(now.plusMillis(JWT_TOKEN_VALIDITY.toMillis()))
+                .withExpiresAt(now.plusMillis(tokenValidity.toMillis()))
                 .sign(this.hmac512);
     }
 
@@ -41,6 +40,10 @@ public class JwtTokenService {
             //log.warn("token invalid: {}", verificationEx.getMessage());
             return null;
         }
+    }
+
+    public void setTokenValidity(Duration tokenValidity) {
+        this.tokenValidity = tokenValidity;
     }
 
 }
