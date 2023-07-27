@@ -4,7 +4,7 @@ import com.clinica.api.dto.LoginRequest;
 import com.clinica.api.dto.LoginResponse;
 import com.clinica.api.entities.User;
 import com.clinica.api.repositories.UserRepository;
-import com.clinica.api.services.UserService;
+import com.clinica.api.services.auth.AuthService;
 import com.clinica.api.services.auth.JwtTokenService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -29,18 +30,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @ActiveProfiles("test")
-public class LoginTest {
+public class AuthenticationTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private UserService userService;
+    private AuthService authService;
 
     @Autowired
     private UserRepository userRepository;
     @Autowired
+
     private JwtTokenService jwtTokenService;
     @BeforeEach
     public void setUp() {
@@ -64,7 +67,7 @@ public class LoginTest {
     // Private login method for reuse
     private ResultActions performLogin(LoginRequest request) throws Exception {
         // Perform the POST request to /login endpoint
-        return mockMvc.perform(post("/api/v1/login")
+        return mockMvc.perform(post("/api/v1/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(request)));
     }
@@ -98,17 +101,23 @@ public class LoginTest {
     }
 
     @Test
-    public void testTokenGeneration() {
+    public void testAuthenticationSuccess() {
         // Prepare the login request payload for successful login
         LoginRequest request = new LoginRequest("john.doe@example.com", "password");
 
-        LoginResponse response = userService.authenticate(request);
+        LoginResponse response = authService.authenticate(request);
         // Get the token from the response and verify its validity
         String responseToken = response.access_token();
         String email = jwtTokenService.validateTokenAndGetEmail(responseToken);
 
         // Assert the successful validation of the token
         assertEquals(request.email(), email);
+    }
+    @Test
+    public void testAuthenticationFailure() {
+        LoginRequest request = new LoginRequest("john.doe@example.com", "wrong_password");
+
+        assertNull(authService.authenticate(request));
     }
 
     @Test
