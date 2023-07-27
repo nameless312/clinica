@@ -14,7 +14,8 @@ jobs:
       - name: Set Up Java
         uses: actions/setup-java@v2 # Set up Java on the runner
         with:
-          java-version: '17' # Use the desired Java version
+          java-version: '17'
+          distribution: 'openjdk'
 
       - name: Build with Maven
         run: mvn clean test # Replace with your build and test commands
