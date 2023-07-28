@@ -1,12 +1,13 @@
 package com.clinica.api.auth;
 
+import com.clinica.api.helpers.UserHelper;
 import com.clinica.api.dto.LoginRequest;
 import com.clinica.api.dto.LoginResponse;
-import com.clinica.api.entities.User;
-import com.clinica.api.repositories.UserRepository;
 import com.clinica.api.services.auth.AuthService;
 import com.clinica.api.services.auth.JwtTokenService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -18,10 +19,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import jakarta.transaction.Transactional;
 
-import java.sql.Timestamp;
 import java.time.Duration;
-import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+@Transactional
 @ActiveProfiles("test")
 public class AuthenticationTest {
 
@@ -41,27 +42,21 @@ public class AuthenticationTest {
     private AuthService authService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserHelper userHelper;
     @Autowired
-
     private JwtTokenService jwtTokenService;
+
+    @PostConstruct
+    public void postConstruct() {
+        userHelper.addNormalUser("john.doe@example.com", "password");
+    }
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-
-        if (userRepository.count() == 0) {
-            // Save a dummy user to the database
-            User dummyUser = new User();
-            dummyUser.setFirstName("John");
-            dummyUser.setLastName("Doe");
-            dummyUser.setEmail("john.doe@example.com");
-            // password
-            dummyUser.setPassword("$2a$10$GrfBKUxRr9XD71yYOaMI7Ooxd1nFHQ8/VtcVeOmYINyHzVIp7tLjC");
-            dummyUser.setDtAdded(Timestamp.from(Instant.now()));
-            dummyUser.setRole("ROLE_USER");
-            dummyUser.setEnabled((short) 1);
-            userRepository.save(dummyUser);
-        }
+    }
+    @AfterEach
+    public void tearDown() {
+        userHelper.clearUsers();
     }
 
     // Private login method for reuse

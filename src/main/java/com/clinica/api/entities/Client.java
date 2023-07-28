@@ -1,11 +1,15 @@
 package com.clinica.api.entities;
 
+import com.clinica.api.dto.AddressDTO;
 import com.clinica.api.dto.ClientDTO;
+import com.clinica.api.dto.MarketingDTO;
+import com.clinica.api.dto.PartnershipDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Optional;
 
 @Data
 @Entity
@@ -67,11 +71,14 @@ public class Client {
     private Timestamp dtRegistered;
 
     public ClientDTO toDto() {
+        AddressDTO addressDTO = address.toDTO();
+        PartnershipDTO partnershipDTO = partnership != null ? partnership.toDTO() : null;
+        MarketingDTO marketingDTO = marketing != null ? marketing.toDTO() : null;
         return new ClientDTO(
                 clientId,
-                address.toDTO(),
-                marketing.toDTO(),
-                partnership.toDTO(),
+                addressDTO,
+                marketingDTO,
+                partnershipDTO,
                 dtRegistered,
                 fullName,
                 nameAbbr,

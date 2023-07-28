@@ -1,7 +1,10 @@
 package com.clinica.api.auth;
 
-import com.clinica.api.entities.User;
-import com.clinica.api.repositories.UserRepository;
+import com.clinica.api.helpers.UserHelper;
+import jakarta.annotation.PostConstruct;
+import org.h2.tools.Server;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -12,9 +15,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import jakarta.transaction.Transactional;
 
-import java.sql.Timestamp;
-import java.time.Instant;
+import java.sql.SQLException;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -24,30 +27,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class AuthorizationTest {
-
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserHelper userHelper;
+
+    @PostConstruct
+    public void postConstruct() {
+        userHelper.addNormalUser("john.doe@example.com", "password");
+    }
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-
-        if (userRepository.count() == 0) {
-            // Save a dummy user to the database
-            User dummyUser = new User();
-            dummyUser.setFirstName("John");
-            dummyUser.setLastName("Doe");
-            dummyUser.setEmail("john.doe@example.com");
-            // password
-            dummyUser.setPassword("$2a$10$GrfBKUxRr9XD71yYOaMI7Ooxd1nFHQ8/VtcVeOmYINyHzVIp7tLjC");
-            dummyUser.setDtAdded(Timestamp.from(Instant.now()));
-            dummyUser.setRole("ROLE_USER");
-            dummyUser.setEnabled((short) 1);
-            userRepository.save(dummyUser);
-        }
     }
 
     // Private login method for reuse
