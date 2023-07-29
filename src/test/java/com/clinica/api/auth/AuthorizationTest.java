@@ -2,7 +2,6 @@ package com.clinica.api.auth;
 
 import com.clinica.api.helpers.UserHelper;
 import jakarta.annotation.PostConstruct;
-import org.h2.tools.Server;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

@@ -146,7 +146,7 @@ CREATE TABLE tclient
     user_id        int4         NULL,
     birthdate      timestamp(6) NULL,
     dt_added       timestamp(6) NOT NULL,
-    dt_registered  timestamp(6) NULL,
+    dt_registered  timestamp(6) NOT NULL,
     dt_update      timestamp(6) NULL,
     email          varchar(255) NULL,
     full_name      varchar(255) NOT NULL,
