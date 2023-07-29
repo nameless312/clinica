@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,9 +30,11 @@ public class ClientService {
         return client.toDto();
     }
     public List<ClientDTO> getAllClients() {
-        List<Client> client = clientDAO.selectAllClients();
-
-        return client.stream().map(Client::toDto).collect(Collectors.toList());
+        List<Client> clients = clientDAO.selectAllClients();
+        if (clients.isEmpty()) {
+            return new ArrayList<ClientDTO>();
+        }
+        return clients.stream().map(Client::toDto).collect(Collectors.toList());
     }
 
 }

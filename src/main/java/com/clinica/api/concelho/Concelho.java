@@ -12,16 +12,8 @@ import java.sql.Timestamp;
 @Table(name = "tconcelho")
 public class Concelho {
     @Id
-    @SequenceGenerator(
-            name = "tconcelho_concelho_id_seq",
-            sequenceName = "tconcelho_concelho_id_seq",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "tconcelho_concelho_id_seq"
-    )
-    @Column(name = "concelho_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "concelho_id")
     private Integer concelhoId;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -60,7 +60,6 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/v1/auth/login").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().hasAuthority(JwtUserDetailsService.ROLE_USER))
                 .headers((headers) -> headers
                         .frameOptions(

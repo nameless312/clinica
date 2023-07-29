@@ -11,16 +11,8 @@ import java.sql.Timestamp;
 @Table(name = "tmarketing")
 public class Marketing {
     @Id
-    @SequenceGenerator(
-            name = "tmarketing_marketing_id_seq",
-            sequenceName = "tmarketing_marketing_id_seq",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "tmarketing_marketing_id_seq"
-    )
-    @Column(name = "marketing_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "marketing_id")
     private Integer marketingId;
 
     @OneToOne(cascade = CascadeType.ALL)

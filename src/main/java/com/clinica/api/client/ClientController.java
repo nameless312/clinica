@@ -28,7 +28,7 @@ public class ClientController {
     public ResponseEntity getClient(Authentication authentication, @PathVariable Integer id) {
         return ResponseEntity.ok().body(clientService.getClient(id));
     }
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity getClients(Authentication authentication) {
         return ResponseEntity.ok().body(clientService.getAllClients());
     }

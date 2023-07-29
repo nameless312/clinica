@@ -1,54 +1,6 @@
-CREATE SEQUENCE tuser_user_id_seq
-    INCREMENT BY 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    START 1
-    CACHE 1
-    NO CYCLE;
-
-CREATE SEQUENCE taddress_address_id_seq
-    INCREMENT BY 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    START 1
-    CACHE 1
-    NO CYCLE;
-
-CREATE SEQUENCE public.tconcelho_concelho_id_seq
-    INCREMENT BY 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    START 1
-    CACHE 1
-    NO CYCLE;
-
-CREATE SEQUENCE public.tdistrict_district_id_seq
-    INCREMENT BY 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    START 1
-    CACHE 1
-    NO CYCLE;
-
-CREATE SEQUENCE public.tmarketing_marketing_id_seq
-    INCREMENT BY 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    START 1
-    CACHE 1
-    NO CYCLE;
-
-CREATE SEQUENCE public.tpartnerships_partnership_id_seq
-    INCREMENT BY 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    START 1
-    CACHE 1
-    NO CYCLE;
-
 CREATE TABLE tuser
 (
-    user_id    serial4      NOT NULL,
+    user_id    serial,
     dt_added   timestamp(6) NOT NULL,
     dt_update  timestamp(6) NULL,
     email      varchar(255) NOT NULL,
@@ -63,7 +15,7 @@ CREATE TABLE tuser
 
 CREATE TABLE tdistrict
 (
-    district_id   int4         NOT NULL,
+    district_id   serial,
     user_id       int4         NULL,
     dt_added      timestamp(6) NOT NULL,
     dt_update     timestamp(6) NULL,
@@ -75,7 +27,7 @@ CREATE TABLE tdistrict
 
 CREATE TABLE tconcelho
 (
-    concelho_id   int4         NOT NULL,
+    concelho_id   serial,
     district_id   int4         NULL,
     user_id       int4         NULL,
     dt_added      timestamp(6) NOT NULL,
@@ -91,7 +43,7 @@ CREATE TABLE tconcelho
 CREATE TABLE tpartnerships
 (
     commision      int4         NOT NULL,
-    partnership_id int4         NOT NULL,
+    partnership_id serial,
     user_id        int4         NULL,
     dt_added       timestamp(6) NOT NULL,
     dt_update      timestamp(6) NULL,
@@ -106,7 +58,7 @@ CREATE TABLE tpartnerships
 
 CREATE TABLE tmarketing
 (
-    marketing_id int4         NOT NULL,
+    marketing_id serial,
     user_id      int4         NULL,
     dt_added     timestamp(6) NOT NULL,
     dt_update    timestamp(6) NULL,
@@ -118,7 +70,7 @@ CREATE TABLE tmarketing
 
 CREATE TABLE taddress
 (
-    address_id  int4         NOT NULL,
+    address_id  serial,
     concelho_id int4         NULL,
     district_id int4         NULL,
     user_id     int4         NULL,
@@ -140,7 +92,7 @@ CREATE TABLE taddress
 CREATE TABLE tclient
 (
     address_id     int4         NULL,
-    client_id      int4         NOT NULL,
+    client_id      serial,
     marketing_id   int4         NULL,
     partnership_id int4         NULL,
     user_id        int4         NULL,

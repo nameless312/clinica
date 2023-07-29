@@ -11,16 +11,8 @@ import java.sql.Timestamp;
 @Table(name = "tdistrict")
 public class District {
     @Id
-    @SequenceGenerator(
-            name = "tdistrict_district_id_seq",
-            sequenceName = "tdistrict_district_id_seq",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "tdistrict_district_id_seq"
-    )
-    @Column(name = "district_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "district_id")
     private Integer districtId;
 
     @Column(name = "district_name", nullable = false)

@@ -15,16 +15,8 @@ import java.sql.Timestamp;
 public class Address {
 
     @Id
-    @SequenceGenerator(
-            name = "taddress_address_id_seq",
-            sequenceName = "taddress_address_id_seq",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "taddress_address_id_seq"
-    )
-    @Column(name = "address_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id")
     private Integer addressId;
 
     @OneToOne(cascade = CascadeType.ALL)
