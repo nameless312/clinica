@@ -1,12 +1,14 @@
 package com.clinica.api.helpers;
 
-import com.clinica.api.entities.Client;
-import com.clinica.api.entities.User;
-import com.clinica.api.repositories.*;
+import com.clinica.api.address.AddressRepository;
+import com.clinica.api.marketing.MarketingRepository;
+import com.clinica.api.partnership.PartnershipRepository;
+import com.clinica.api.user.UserRepository;
+import com.clinica.api.client.Client;
+import com.clinica.api.client.ClientRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import jakarta.transaction.Transactional;
 

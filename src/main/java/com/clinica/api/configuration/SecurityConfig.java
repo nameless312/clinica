@@ -1,7 +1,7 @@
 package com.clinica.api.configuration;
 
-import com.clinica.api.services.auth.JwtRequestFilter;
-import com.clinica.api.services.auth.JwtUserDetailsService;
+import com.clinica.api.auth.jwt.JwtRequestFilter;
+import com.clinica.api.auth.jwt.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,10 +1,7 @@
 package com.clinica.api.auth;
 
 import com.clinica.api.helpers.UserHelper;
-import com.clinica.api.dto.LoginRequest;
-import com.clinica.api.dto.LoginResponse;
-import com.clinica.api.services.auth.AuthService;
-import com.clinica.api.services.auth.JwtTokenService;
+import com.clinica.api.auth.jwt.JwtTokenService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import org.junit.jupiter.api.AfterEach;

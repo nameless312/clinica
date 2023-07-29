@@ -1,17 +1,15 @@
 package com.clinica.api.helpers;
 
-import com.clinica.api.entities.Address;
-import com.clinica.api.entities.Concelho;
-import com.clinica.api.entities.District;
-import com.clinica.api.entities.User;
-import com.clinica.api.repositories.AddressRepository;
-import com.clinica.api.repositories.ConcelhoRepository;
-import com.clinica.api.repositories.DistrictRepository;
-import com.clinica.api.repositories.UserRepository;
+import com.clinica.api.address.Address;
+import com.clinica.api.concelho.Concelho;
+import com.clinica.api.district.District;
+import com.clinica.api.address.AddressRepository;
+import com.clinica.api.concelho.ConcelhoRepository;
+import com.clinica.api.district.DistrictRepository;
+import com.clinica.api.user.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import jakarta.transaction.Transactional;
 

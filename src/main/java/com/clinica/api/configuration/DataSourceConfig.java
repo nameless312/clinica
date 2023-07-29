@@ -19,14 +19,10 @@ public class DataSourceConfig {
     @Value("${spring.datasource.password}")
     private String password;
 
-//    @Value("${spring.datasource.driver-class-name}")
-//    private String driver;
-
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl(url);
-//        dataSource.setDriverClassName(driver);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         return dataSource;

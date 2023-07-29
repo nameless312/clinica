@@ -1,12 +1,8 @@
 package com.clinica.api.client;
 
-import com.clinica.api.dto.ClientDTO;
-import com.clinica.api.dto.LoginRequest;
 import com.clinica.api.helpers.AddressHelper;
 import com.clinica.api.helpers.ClientHelper;
 import com.clinica.api.helpers.UserHelper;
-import com.clinica.api.services.ClientService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -17,7 +13,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;

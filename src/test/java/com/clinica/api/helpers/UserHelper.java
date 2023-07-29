@@ -1,7 +1,7 @@
 package com.clinica.api.helpers;
 
-import com.clinica.api.entities.User;
-import com.clinica.api.repositories.UserRepository;
+import com.clinica.api.user.User;
+import com.clinica.api.user.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;

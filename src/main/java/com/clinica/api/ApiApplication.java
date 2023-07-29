@@ -4,8 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@SpringBootApplication
-@EntityScan(basePackages = "com.clinica.api.entities") // Adjust the package name accordingly
+@SpringBootApplication // Adjust the package name accordingly
 public class ApiApplication {
 
 	public static void main(String[] args) {
