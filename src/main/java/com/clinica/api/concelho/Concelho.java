@@ -13,22 +13,23 @@ import java.sql.Timestamp;
 public class Concelho {
     @Id
     @SequenceGenerator(
-            name = "tconcelho_id_seq",
-            sequenceName = "tconcelho_id_seq"
+            name = "tconcelho_concelho_id_seq",
+            sequenceName = "tconcelho_concelho_id_seq",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "tconcelho_id_seq"
+            generator = "tconcelho_concelho_id_seq"
     )
     @Column(name = "concelho_id", nullable = false)
     private Integer concelhoId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "concelho_id", referencedColumnName = "district_id")
+    @JoinColumn(name = "district_id", referencedColumnName = "district_id")
     private District district;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "concelho_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
     @Column(name = "concelho_name", nullable = false)

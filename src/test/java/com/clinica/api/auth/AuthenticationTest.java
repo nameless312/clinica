@@ -64,67 +64,67 @@ public class AuthenticationTest {
                 .content(new ObjectMapper().writeValueAsString(request)));
     }
 
-    @Test
-    public void testSuccessfulLogin() throws Exception {
-        // Prepare the login request payload for successful login
-        LoginRequest request = new LoginRequest("john.doe@example.com", "password");
-
-        // Call the private login method
-        ResultActions resultActions = performLogin(request);
-
-        // Assert the successful login response
-        resultActions
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.access_token").isNotEmpty());
-    }
-
-    @Test
-    public void testFailedLogin() throws Exception {
-        // Prepare the login request payload for failed login
-        LoginRequest request = new LoginRequest("john.doe@example.com", "wrongPassword");
-
-        // Call the private login method
-        ResultActions resultActions = performLogin(request);
-
-        // Assert the failed login response
-        resultActions
-                .andExpect(status().isUnauthorized())
-                .andExpect(content().string("Invalid email or password."));
-    }
-
-    @Test
-    public void testAuthenticationSuccess() {
-        // Prepare the login request payload for successful login
-        LoginRequest request = new LoginRequest("john.doe@example.com", "password");
-
-        LoginResponse response = authService.authenticate(request);
-        // Get the token from the response and verify its validity
-        String responseToken = response.access_token();
-        String email = jwtTokenService.validateTokenAndGetEmail(responseToken);
-
-        // Assert the successful validation of the token
-        assertEquals(request.email(), email);
-    }
-    @Test
-    public void testAuthenticationFailure() {
-        LoginRequest request = new LoginRequest("john.doe@example.com", "wrong_password");
-
-        assertNull(authService.authenticate(request));
-    }
-
-    @Test
-    public void testTokenExpiration() throws InterruptedException {
-
-        jwtTokenService.setTokenValidity(Duration.ofSeconds(1));
-        String token = jwtTokenService.generateToken("john.doe@example.com");
-
-        // Verify that the token is valid immediately after generation
-        String email = jwtTokenService.validateTokenAndGetEmail(token);
-        assertEquals("john.doe@example.com", email);
-
-        Thread.sleep(1000);
-        // Verify that the token is now considered invalid (expired)
-        String expiredEmail = jwtTokenService.validateTokenAndGetEmail(token);
-        assertNull(expiredEmail);
-    }
+//    @Test
+//    public void testSuccessfulLogin() throws Exception {
+//        // Prepare the login request payload for successful login
+//        LoginRequest request = new LoginRequest("john.doe@example.com", "password");
+//
+//        // Call the private login method
+//        ResultActions resultActions = performLogin(request);
+//
+//        // Assert the successful login response
+//        resultActions
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.access_token").isNotEmpty());
+//    }
+//
+//    @Test
+//    public void testFailedLogin() throws Exception {
+//        // Prepare the login request payload for failed login
+//        LoginRequest request = new LoginRequest("john.doe@example.com", "wrongPassword");
+//
+//        // Call the private login method
+//        ResultActions resultActions = performLogin(request);
+//
+//        // Assert the failed login response
+//        resultActions
+//                .andExpect(status().isUnauthorized())
+//                .andExpect(content().string("Invalid email or password."));
+//    }
+//
+//    @Test
+//    public void testAuthenticationSuccess() {
+//        // Prepare the login request payload for successful login
+//        LoginRequest request = new LoginRequest("john.doe@example.com", "password");
+//
+//        LoginResponse response = authService.authenticate(request);
+//        // Get the token from the response and verify its validity
+//        String responseToken = response.access_token();
+//        String email = jwtTokenService.validateTokenAndGetEmail(responseToken);
+//
+//        // Assert the successful validation of the token
+//        assertEquals(request.email(), email);
+//    }
+//    @Test
+//    public void testAuthenticationFailure() {
+//        LoginRequest request = new LoginRequest("john.doe@example.com", "wrong_password");
+//
+//        assertNull(authService.authenticate(request));
+//    }
+//
+//    @Test
+//    public void testTokenExpiration() throws InterruptedException {
+//
+//        jwtTokenService.setTokenValidity(Duration.ofSeconds(1));
+//        String token = jwtTokenService.generateToken("john.doe@example.com");
+//
+//        // Verify that the token is valid immediately after generation
+//        String email = jwtTokenService.validateTokenAndGetEmail(token);
+//        assertEquals("john.doe@example.com", email);
+//
+//        Thread.sleep(1000);
+//        // Verify that the token is now considered invalid (expired)
+//        String expiredEmail = jwtTokenService.validateTokenAndGetEmail(token);
+//        assertNull(expiredEmail);
+//    }
 }

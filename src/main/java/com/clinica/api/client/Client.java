@@ -19,30 +19,31 @@ import java.util.Date;
 public class Client {
     @Id
     @SequenceGenerator(
-            name = "tclient_id_seq",
-            sequenceName = "tclient_id_seq"
+            name = "tclient_client_id_seq",
+            sequenceName = "tclient_client_id_seq",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "tclient_id_seq"
+            generator = "tclient_client_id_seq"
     )
     @Column(name = "client_id", nullable = false)
     private Integer clientId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id", referencedColumnName = "partnership_id")
+    @JoinColumn(name = "partnership_id", referencedColumnName = "partnership_id")
     private Partnership partnership;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id", referencedColumnName = "marketing_id")
+    @JoinColumn(name = "marketing_id", referencedColumnName = "marketing_id")
     private Marketing marketing;
 
     @Column(name = "full_name", nullable = false)

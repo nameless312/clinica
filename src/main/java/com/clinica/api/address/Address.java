@@ -1,5 +1,6 @@
 package com.clinica.api.address;
 
+import com.clinica.api.client.Client;
 import com.clinica.api.concelho.Concelho;
 import com.clinica.api.district.District;
 import com.clinica.api.user.User;
@@ -15,26 +16,27 @@ public class Address {
 
     @Id
     @SequenceGenerator(
-            name = "taddress_id_seq",
-            sequenceName = "taddress_id_seq"
+            name = "taddress_address_id_seq",
+            sequenceName = "taddress_address_id_seq",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "taddress_id_seq"
+            generator = "taddress_address_id_seq"
     )
     @Column(name = "address_id", nullable = false)
     private Integer addressId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "district_id")
+    @JoinColumn(name = "district_id", referencedColumnName = "district_id")
     private District district;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "concelho_id")
+    @JoinColumn(name = "concelho_id", referencedColumnName = "concelho_id")
     private Concelho concelho;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
     @Column(name = "street_name", nullable = false)

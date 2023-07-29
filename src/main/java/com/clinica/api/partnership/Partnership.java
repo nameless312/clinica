@@ -12,18 +12,19 @@ import java.sql.Timestamp;
 public class Partnership {
     @Id
     @SequenceGenerator(
-            name = "tpartnerships_id_seq",
-            sequenceName = "tpartnerships_id_seq"
+            name = "tpartnerships_partnership_id_seq",
+            sequenceName = "tpartnerships_partnership_id_seq",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "tpartnerships_id_seq"
+            generator = "tpartnerships_partnership_id_seq"
     )
     @Column(name = "partnership_id", nullable = false)
     private Integer partnershipId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "partnership_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
     @Column(name = "partner", nullable = false)
