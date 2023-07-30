@@ -1,0 +1,27 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "authentication": {
+    "bucket": "elasticbeanstalk-eu-west-2-904016162209",
+    "key": ".dockercfg"
+  },
+  "containerDefinitions": [
+    {
+      "name": "clinica-api",
+      "image": "nameless312/clinica-api:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 8080
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value": "jdbc:postgresql://awseb-e-pi82cemwnh-stack-awsebrdsdatabase-icmaci1llel7.cm0f0i9bb27k.eu-west-2.rds.amazonaws.com:5432/clinica"
+        }
+      ]
+    }
+  ]
+}
