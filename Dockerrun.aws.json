@@ -7,7 +7,7 @@
   "containerDefinitions": [
     {
       "name": "clinica-api",
-      "image": "nameless312/clinica-api:latest",
+      "image": "nameless312/clinica-api:30.07.2023.23.08.50",
       "essential": true,
       "memory": 512,
       "portMappings": [
