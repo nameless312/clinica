@@ -19,7 +19,7 @@
       "environment": [
         {
           "name": "SPRING_DATASOURCE_URL",
-          "value": "jdbc:postgresql://awseb-e-pi82cemwnh-stack-awsebrdsdatabase-icmaci1llel7.cm0f0i9bb27k.eu-west-2.rds.amazonaws.com:5432/clinica"
+          "value": "jdbc:postgresql://awseb-e-bat92nkxep-stack-awsebrdsdatabase-aw2fbsfqekjw.cm0f0i9bb27k.eu-west-2.rds.amazonaws.com:5432/clinica"
         }
       ]
     }
