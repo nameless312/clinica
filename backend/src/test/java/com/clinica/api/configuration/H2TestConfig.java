@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @TestConfiguration
-@EnableJpaRepositories(basePackages = "com.clinica.api.repositories")
+@EnableJpaRepositories(basePackages = "com.clinica.api")
 @EnableTransactionManagement
 public class H2TestConfig {
 
@@ -33,7 +33,7 @@ public class H2TestConfig {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("com.clinica.api.entities");
+        entityManagerFactoryBean.setPackagesToScan("com.clinica.api");
         return entityManagerFactoryBean;
     }
 
