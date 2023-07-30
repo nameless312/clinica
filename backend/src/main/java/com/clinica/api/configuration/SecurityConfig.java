@@ -59,6 +59,7 @@ public class SecurityConfig {
         return http.cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/health").permitAll()
                         .requestMatchers("/api/v1/auth/login").permitAll()
                         .anyRequest().hasAuthority(JwtUserDetailsService.ROLE_USER))
                 .headers((headers) -> headers
