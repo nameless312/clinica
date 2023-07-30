@@ -11,10 +11,6 @@
 	<groupId>com.clinica</groupId>
 	<artifactId>clinica-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<organization>
-		<name>nameless312</name>
-		<url>www.clinicajoanaandrade.com</url>
-	</organization>
 	<name>api</name>
 	<description>API clinica Joana Andrade</description>
 	<properties>
@@ -22,6 +18,8 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<docker.username>nameless312</docker.username>
+		<docker.image.name>clinica-api</docker.image.name>
+		<docker.image.tag/>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -189,7 +187,7 @@
 						</platforms>
 					</from>
 					<to>
-						<image>docker.io/${project.organization.name}/${project.artifactId}:${project.version}</image>
+						<image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
 						<tags>
 							<tag>latest</tag>
 						</tags>
