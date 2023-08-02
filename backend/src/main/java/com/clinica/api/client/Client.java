@@ -1,11 +1,11 @@
 package com.clinica.api.client;
 
-import com.clinica.api.address.AddressDTO;
-import com.clinica.api.marketing.MarketingDTO;
-import com.clinica.api.partnership.PartnershipDTO;
 import com.clinica.api.address.Address;
+import com.clinica.api.address.AddressDTO;
 import com.clinica.api.marketing.Marketing;
+import com.clinica.api.marketing.MarketingDTO;
 import com.clinica.api.partnership.Partnership;
+import com.clinica.api.partnership.PartnershipDTO;
 import com.clinica.api.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -54,7 +54,7 @@ public class Client {
     private String email;
 
     @Column(name = "birthdate")
-    private Timestamp birthdate;
+    private Date birthdate;
 
     @Column(name = "mobile")
     private String mobile;
