@@ -2,6 +2,8 @@ package com.clinica.api.client;
 
 import com.clinica.api.address.Address;
 import com.clinica.api.address.AddressDAO;
+import com.clinica.api.address.AddressRepository;
+import com.clinica.api.address.AddressService;
 import com.clinica.api.client.inputs.NewClient;
 import com.clinica.api.client.inputs.NewClientAddress;
 import com.clinica.api.concelho.Concelho;
@@ -31,9 +33,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class ClientService {
     private final ClientDAO clientDAO;
-    private final AddressDAO addressDao;
-    private final DistrictDAO districtDAO;
-    private final ConcelhoDAO concelhoDAO;
+    private final AddressService addressService;
     private final MarketingDAO marketingDAO;
     private final PartnershipDAO partnershipDAO;
     private final UserDAO userDAO;
@@ -41,17 +41,13 @@ public class ClientService {
 
     @Autowired
     public ClientService(@Qualifier(value = "ClientJPA") ClientDAO clientDAO,
-                         @Qualifier(value = "AddressJPA") AddressDAO addressDao,
-                         @Qualifier(value = "DistrictJPA") DistrictDAO districtDAO,
-                         @Qualifier(value = "ConcelhoJPA") ConcelhoDAO concelhoDAO,
+                         AddressService addressService,
                          @Qualifier(value = "MarketingJPA") MarketingDAO marketingDAO,
                          @Qualifier(value = "PartnershipJPA") PartnershipDAO partnershipDAO,
                          @Qualifier(value = "UserJPA") UserDAO userDAO,
                          Clock clock) {
         this.clientDAO = clientDAO;
-        this.addressDao = addressDao;
-        this.districtDAO = districtDAO;
-        this.concelhoDAO = concelhoDAO;
+        this.addressService = addressService;
         this.marketingDAO = marketingDAO;
         this.partnershipDAO = partnershipDAO;
         this.userDAO = userDAO;
@@ -98,7 +94,7 @@ public class ClientService {
                         () -> new ResourceNotFoundException("marketing with id [%s] not found".formatted(marketingId))
                 );
         }
-        Address address = insertNewAddress(user, newClient.address());
+        Address address = addressService.insertNewAddress(user, newClient.address());
 
         Client client = new Client();
 
@@ -118,29 +114,5 @@ public class ClientService {
         client.setDtRegistered(Timestamp.from(Instant.now(clock)));
 
         clientDAO.insertClient(client);
-    }
-    private Address insertNewAddress(User user, NewClientAddress newAddress) {
-        Integer districtId = newAddress.districtId();
-        Integer concelhoId = newAddress.concelhoId();
-        District district = districtDAO.selectDistrictById(districtId).
-                orElseThrow(
-                        () -> new ResourceNotFoundException("district with id [%s] not found".formatted(districtId))
-                );
-        Concelho concelho = concelhoDAO.selectConcelhoById(newAddress.concelhoId()).
-                orElseThrow(
-                        () -> new ResourceNotFoundException("concelho with id [%s] not found".formatted(concelhoId))
-                );
-
-        Address address = new Address();
-
-        address.setDistrict(district);
-        address.setConcelho(concelho);
-        address.setUser(user);
-        address.setStreetName(newAddress.streetName());
-        address.setCity(newAddress.city());
-        address.setZipCode(newAddress.zipCode());
-        address.setLocality(newAddress.locality());
-
-        return addressDao.insertAddress(address);
     }
 }
