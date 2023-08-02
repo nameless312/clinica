@@ -1,18 +1,24 @@
 package com.clinica.api.client;
 
+import com.clinica.api.address.AddressDAO;
+import com.clinica.api.concelho.ConcelhoDAO;
+import com.clinica.api.district.DistrictDAO;
 import com.clinica.api.exceptions.ResourceNotFoundException;
-import com.github.javafaker.Faker;
+import com.clinica.api.marketing.MarketingDAO;
+import com.clinica.api.partnership.PartnershipDAO;
+import com.clinica.api.user.UserDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Timestamp;
+import java.time.Clock;
 import java.time.Instant;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,11 +28,23 @@ class ClientServiceTest {
 
     @Mock
     private ClientDAO clientDAO;
+    @Mock
+    private UserDAO userDAO;
+    @Mock
+    private DistrictDAO districtDAO;
+    @Mock
+    private ConcelhoDAO concelhoDAO;
+    private MarketingDAO marketingDAO;
+    private PartnershipDAO partnershipDAO;
+    @Mock
+    private AddressDAO addressDao;
+    @Mock
+    private Clock clock;
     private ClientService underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new ClientService(clientDAO);
+        underTest = new ClientService(clientDAO, addressDao, districtDAO, concelhoDAO, marketingDAO, partnershipDAO, userDAO, clock);
     }
 
     @Test

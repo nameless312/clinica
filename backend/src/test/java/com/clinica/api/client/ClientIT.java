@@ -1,16 +1,12 @@
 package com.clinica.api.client;
 
 import com.clinica.api.testcontainers.AbstractTestcontainers;
-import com.github.javafaker.Faker;
-import com.github.javafaker.Name;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.Random;
-import java.util.UUID;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 

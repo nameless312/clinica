@@ -1,16 +1,16 @@
 package com.clinica.api.helpers;
 
 import com.clinica.api.address.AddressRepository;
+import com.clinica.api.client.Client;
+import com.clinica.api.client.ClientRepository;
 import com.clinica.api.marketing.MarketingRepository;
 import com.clinica.api.partnership.PartnershipRepository;
 import com.clinica.api.user.UserRepository;
-import com.clinica.api.client.Client;
-import com.clinica.api.client.ClientRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import jakarta.transaction.Transactional;
 
 import java.sql.Timestamp;
 import java.time.Instant;

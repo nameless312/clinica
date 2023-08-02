@@ -4,10 +4,10 @@ import com.clinica.api.user.User;
 import com.clinica.api.user.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import jakarta.transaction.Transactional;
 
 import java.sql.Timestamp;
 import java.time.Instant;

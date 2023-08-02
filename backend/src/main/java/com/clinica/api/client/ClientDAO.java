@@ -6,4 +6,5 @@ import java.util.Optional;
 public interface ClientDAO {
     Optional<Client> selectClientById(Integer id);
     List<Client> selectAllClients();
+    void insertClient(Client client);
 }

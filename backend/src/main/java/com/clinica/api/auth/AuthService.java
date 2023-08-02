@@ -1,6 +1,7 @@
 package com.clinica.api.auth;
 
 import com.clinica.api.auth.jwt.JwtTokenService;
+import com.clinica.api.exceptions.InvalidCredentialsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,15 +22,15 @@ public class AuthService {
         this.authenticationManager = authenticationManager;
     }
 
-    public LoginResponse authenticate(LoginRequest loginRequest) {
+    public String authenticate(LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password())
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            return new LoginResponse(jwtTokenService.generateToken(loginRequest.email()));
+            return jwtTokenService.generateToken(loginRequest.email());
         } catch (AuthenticationException e) {
-            return null;
+            throw new InvalidCredentialsException("Invalid email or password.");
         }
     }
 }

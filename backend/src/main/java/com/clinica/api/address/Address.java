@@ -1,6 +1,5 @@
 package com.clinica.api.address;
 
-import com.clinica.api.client.Client;
 import com.clinica.api.concelho.Concelho;
 import com.clinica.api.district.District;
 import com.clinica.api.user.User;
