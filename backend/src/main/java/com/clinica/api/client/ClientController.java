@@ -1,5 +1,6 @@
 package com.clinica.api.client;
 
+import com.clinica.api.client.inputs.ClientUpdate;
 import com.clinica.api.client.inputs.NewClient;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -34,9 +35,14 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insertClient(Authentication authentication, @Valid @RequestBody NewClient newClient) {
-        clientService.insertClient(newClient);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<ClientDTO> insertClient(Authentication authentication, @Valid @RequestBody NewClient newClient) {
+        ClientDTO client = clientService.insertClient(newClient);
+        return ResponseEntity.status(HttpStatus.CREATED).body(client);
+    }
+    @PutMapping
+    public ResponseEntity<Void> updateClient(Authentication authentication, @Valid @RequestBody ClientUpdate updatedClient) {
+        clientService.updateClient(updatedClient);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

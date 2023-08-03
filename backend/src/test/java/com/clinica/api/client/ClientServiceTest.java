@@ -41,10 +41,7 @@ class ClientServiceTest {
     private ClientDAO clientDAO;
     @Mock
     private UserDAO userDAO;
-    @Mock
-    private DistrictDAO districtDAO;
-    @Mock
-    private ConcelhoDAO concelhoDAO;
+    private AddressDAO addressDAO;
     @Mock
     private MarketingDAO marketingDAO;
     @Mock
@@ -58,7 +55,7 @@ class ClientServiceTest {
     @BeforeEach
     void setUp() {
         clock = Clock.systemDefaultZone();
-        underTest = new ClientService(clientDAO, addressService, marketingDAO, partnershipDAO, userDAO, clock);
+        underTest = new ClientService(clientDAO, addressService, addressDAO, marketingDAO, partnershipDAO, userDAO, clock);
     }
 
     @Test
@@ -152,7 +149,7 @@ class ClientServiceTest {
         assertThat(capturedCustomer.getBirthdate()).isEqualTo(request.birthDate());
         assertThat(capturedCustomer.getMobile()).isEqualTo(request.mobile());
         assertThat(capturedCustomer.getLanline()).isEqualTo(request.lanline());
-        assertThat(capturedCustomer.getGender()).isEqualTo(request.gender());
+        assertThat(capturedCustomer.getGender()).isEqualTo(Gender.getGender(request.gender()));
         assertThat(capturedCustomer.getSsn()).isEqualTo(request.ssn());
     }
     @Test
@@ -208,7 +205,7 @@ class ClientServiceTest {
         assertThat(capturedCustomer.getBirthdate()).isEqualTo(request.birthDate());
         assertThat(capturedCustomer.getMobile()).isEqualTo(request.mobile());
         assertThat(capturedCustomer.getLanline()).isEqualTo(request.lanline());
-        assertThat(capturedCustomer.getGender()).isEqualTo(request.gender());
+        assertThat(capturedCustomer.getGender()).isEqualTo(Gender.getGender(request.gender()));
         assertThat(capturedCustomer.getSsn()).isEqualTo(request.ssn());
     }
     @Test
@@ -264,7 +261,7 @@ class ClientServiceTest {
         assertThat(capturedCustomer.getBirthdate()).isEqualTo(request.birthDate());
         assertThat(capturedCustomer.getMobile()).isEqualTo(request.mobile());
         assertThat(capturedCustomer.getLanline()).isEqualTo(request.lanline());
-        assertThat(capturedCustomer.getGender()).isEqualTo(request.gender());
+        assertThat(capturedCustomer.getGender()).isEqualTo(Gender.getGender(request.gender()));
         assertThat(capturedCustomer.getSsn()).isEqualTo(request.ssn());
     }
     @Test
