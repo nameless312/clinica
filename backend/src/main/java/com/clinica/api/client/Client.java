@@ -28,19 +28,19 @@ public class Client {
     @Column(name = "client_id")
     private Integer clientId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "partnership_id", referencedColumnName = "partnership_id")
     private Partnership partnership;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "marketing_id", referencedColumnName = "marketing_id")
     private Marketing marketing;
 
