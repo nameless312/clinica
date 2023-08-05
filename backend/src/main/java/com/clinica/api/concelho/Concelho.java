@@ -16,11 +16,11 @@ public class Concelho {
     @Column(name = "concelho_id")
     private Integer concelhoId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "district_id", referencedColumnName = "district_id")
     private District district;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 

@@ -52,10 +52,10 @@ class MarketingServiceTest {
     @Test
     void selectAllMarketingChannelsEmpty() {
         // Given
-        List<Marketing> clients = List.of();
+        List<Marketing> channels = List.of();
 
         // When
-        when(marketingDAO.selectMarketingChannels()).thenReturn(clients);
+        when(marketingDAO.selectMarketingChannels()).thenReturn(channels);
 
         // Then
         assertThat(underTest.getAllMarketingChannels()).isEmpty();

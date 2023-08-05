@@ -18,15 +18,15 @@ public class Address {
     @Column(name = "address_id")
     private Integer addressId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "district_id", referencedColumnName = "district_id")
     private District district;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "concelho_id", referencedColumnName = "concelho_id")
     private Concelho concelho;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 

@@ -21,7 +21,7 @@ public class Marketing {
     @Column(name = "marketing_id")
     private Integer marketingId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
