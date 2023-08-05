@@ -63,4 +63,15 @@ public class ClientJPADataAccessServiceTest extends AbstractTestcontainers {
         // Then
         verify(clientRepository).save(client);
     }
+    @Test
+    void updateClient() {
+        // Given
+        Client client = new Client();
+
+        // When
+        underTest.updateClient(client);
+
+        // Then
+        verify(clientRepository).save(client);
+    }
 }

@@ -17,7 +17,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 import java.time.Clock;
@@ -28,8 +30,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ClientServiceTest {
@@ -38,10 +40,7 @@ class ClientServiceTest {
     private ClientDAO clientDAO;
     @Mock
     private UserDAO userDAO;
-    @Mock
-    private DistrictDAO districtDAO;
-    @Mock
-    private ConcelhoDAO concelhoDAO;
+    private AddressDAO addressDAO;
     @Mock
     private MarketingDAO marketingDAO;
     @Mock
@@ -55,7 +54,7 @@ class ClientServiceTest {
     @BeforeEach
     void setUp() {
         clock = Clock.systemDefaultZone();
-        underTest = new ClientService(clientDAO, addressService, marketingDAO, partnershipDAO, userDAO, clock);
+        underTest = new ClientService(clientDAO, addressService, addressDAO, marketingDAO, partnershipDAO, userDAO, clock);
     }
 
     @Test
@@ -107,26 +106,49 @@ class ClientServiceTest {
         Marketing marketing = new Marketing();
         marketing.setMarketingId(1);
 
+        String fullname = "John Doe Smith";
+        String abbrName = "John Smith";
+        String email = "a@a.com";
+        Date birthdate = Date.from(Instant.now(clock));
+        String mobile = "910012345";
+        String lanline = "255098890";
+        String gender = "Female";
+        String ssn = "123456789";
         NewClient request = new NewClient(
                 1,
                 1,
                 1,
                 null,
-                "John Doe Smith",
-                "John Smith",
-                "a@a.com",
-                Date.from(Instant.now(clock)),
-                "910012345",
-                "255098890",
-                "Female",
-                "123456789"
+                fullname,
+                abbrName,
+                email,
+                birthdate,
+                mobile,
+                lanline,
+                gender,
+                ssn
         );
+
+        Client savedClient = new Client();
+        savedClient.setClientId(1);
+        savedClient.setUser(user);
+        savedClient.setPartnership(partnership);
+        savedClient.setMarketing(marketing);
+        savedClient.setFullName(fullname);
+        savedClient.setNameAbbr(abbrName);
+        savedClient.setEmail(email);
+        savedClient.setBirthdate(birthdate);
+        savedClient.setMobile(mobile);
+        savedClient.setLanline(lanline);
+        savedClient.setGender(Gender.getGender(gender));
+        savedClient.setSsn(ssn);
 
         // When
         when(userDAO.selectUserById(request.userId())).thenReturn(Optional.of(user));
         when(partnershipDAO.selectPartnershipById(request.partnershipId())).thenReturn(Optional.of(partnership));
         when(marketingDAO.selectMarketingChannelById(request.marketingId())).thenReturn(Optional.of(marketing));
         when(addressService.insertNewAddress(user, request.address())).thenReturn(address);
+        when(clientDAO.insertClient(any(Client.class))).thenReturn(savedClient);
         underTest.insertClient(request);
 
         // Then
@@ -149,7 +171,7 @@ class ClientServiceTest {
         assertThat(capturedCustomer.getBirthdate()).isEqualTo(request.birthDate());
         assertThat(capturedCustomer.getMobile()).isEqualTo(request.mobile());
         assertThat(capturedCustomer.getLanline()).isEqualTo(request.lanline());
-        assertThat(capturedCustomer.getGender()).isEqualTo(request.gender());
+        assertThat(capturedCustomer.getGender()).isEqualTo(Gender.getGender(request.gender()));
         assertThat(capturedCustomer.getSsn()).isEqualTo(request.ssn());
     }
     @Test
@@ -164,25 +186,47 @@ class ClientServiceTest {
         Marketing marketing = new Marketing();
         marketing.setMarketingId(1);
 
+        String fullname = "John Doe Smith";
+        String abbrName = "John Smith";
+        String email = "a@a.com";
+        Date birthdate = Date.from(Instant.now(clock));
+        String mobile = "910012345";
+        String lanline = "255098890";
+        String gender = "Female";
+        String ssn = "123456789";
         NewClient request = new NewClient(
                 1,
                 null,
                 1,
                 null,
-                "John Doe Smith",
-                "John Smith",
-                "a@a.com",
-                Date.from(Instant.now(clock)),
-                "910012345",
-                "255098890",
-                "Female",
-                "123456789"
+                fullname,
+                abbrName,
+                email,
+                birthdate,
+                mobile,
+                lanline,
+                gender,
+                ssn
         );
+
+        Client savedClient = new Client();
+        savedClient.setClientId(1);
+        savedClient.setUser(user);
+        savedClient.setMarketing(marketing);
+        savedClient.setFullName(fullname);
+        savedClient.setNameAbbr(abbrName);
+        savedClient.setEmail(email);
+        savedClient.setBirthdate(birthdate);
+        savedClient.setMobile(mobile);
+        savedClient.setLanline(lanline);
+        savedClient.setGender(Gender.getGender(gender));
+        savedClient.setSsn(ssn);
 
         // When
         when(userDAO.selectUserById(request.userId())).thenReturn(Optional.of(user));
         when(marketingDAO.selectMarketingChannelById(request.marketingId())).thenReturn(Optional.of(marketing));
         when(addressService.insertNewAddress(user, request.address())).thenReturn(address);
+        when(clientDAO.insertClient(any(Client.class))).thenReturn(savedClient);
         underTest.insertClient(request);
 
         // Then
@@ -205,7 +249,7 @@ class ClientServiceTest {
         assertThat(capturedCustomer.getBirthdate()).isEqualTo(request.birthDate());
         assertThat(capturedCustomer.getMobile()).isEqualTo(request.mobile());
         assertThat(capturedCustomer.getLanline()).isEqualTo(request.lanline());
-        assertThat(capturedCustomer.getGender()).isEqualTo(request.gender());
+        assertThat(capturedCustomer.getGender()).isEqualTo(Gender.getGender(request.gender()));
         assertThat(capturedCustomer.getSsn()).isEqualTo(request.ssn());
     }
     @Test
@@ -220,25 +264,46 @@ class ClientServiceTest {
         Partnership partnership = new Partnership();
         partnership.setPartnershipId(1);
 
+        String fullname = "John Doe Smith";
+        String abbrName = "John Smith";
+        String email = "a@a.com";
+        Date birthdate = Date.from(Instant.now(clock));
+        String mobile = "910012345";
+        String lanline = "255098890";
+        String gender = "Female";
+        String ssn = "123456789";
         NewClient request = new NewClient(
                 1,
                 1,
                 null,
                 null,
-                "John Doe Smith",
-                "John Smith",
-                "a@a.com",
-                Date.from(Instant.now(clock)),
-                "910012345",
-                "255098890",
-                "Female",
-                "123456789"
+                fullname,
+                abbrName,
+                email,
+                birthdate,
+                mobile,
+                lanline,
+                gender,
+                ssn
         );
+        Client savedClient = new Client();
+        savedClient.setClientId(1);
+        savedClient.setUser(user);
+        savedClient.setPartnership(partnership);
+        savedClient.setFullName(fullname);
+        savedClient.setNameAbbr(abbrName);
+        savedClient.setEmail(email);
+        savedClient.setBirthdate(birthdate);
+        savedClient.setMobile(mobile);
+        savedClient.setLanline(lanline);
+        savedClient.setGender(Gender.getGender(gender));
+        savedClient.setSsn(ssn);
 
         // When
         when(userDAO.selectUserById(request.userId())).thenReturn(Optional.of(user));
         when(partnershipDAO.selectPartnershipById(request.partnershipId())).thenReturn(Optional.of(partnership));
-        when(addressService.insertNewAddress(user, request.address())).thenReturn(address);
+        when(addressService.insertNewAddress(user, request.address())).thenReturn(address);;
+        when(clientDAO.insertClient(any(Client.class))).thenReturn(savedClient);
         underTest.insertClient(request);
 
         // Then
@@ -261,7 +326,7 @@ class ClientServiceTest {
         assertThat(capturedCustomer.getBirthdate()).isEqualTo(request.birthDate());
         assertThat(capturedCustomer.getMobile()).isEqualTo(request.mobile());
         assertThat(capturedCustomer.getLanline()).isEqualTo(request.lanline());
-        assertThat(capturedCustomer.getGender()).isEqualTo(request.gender());
+        assertThat(capturedCustomer.getGender()).isEqualTo(Gender.getGender(request.gender()));
         assertThat(capturedCustomer.getSsn()).isEqualTo(request.ssn());
     }
     @Test

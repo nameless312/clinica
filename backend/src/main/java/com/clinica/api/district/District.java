@@ -23,7 +23,7 @@ public class District {
     private User user;
 
     @Column(name = "dt_added", nullable = false)
-    private Timestamp dtAdded;
+    private Timestamp dtAdded = new Timestamp(System.currentTimeMillis());;
 
     @Column(name = "dt_update")
     private Timestamp dtUpdate;
