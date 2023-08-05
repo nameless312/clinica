@@ -1,9 +1,11 @@
 package com.clinica.api.client;
 
 import com.clinica.api.address.Address;
+import com.clinica.api.address.AddressDAO;
 import com.clinica.api.address.AddressService;
 import com.clinica.api.client.inputs.NewClient;
 import com.clinica.api.concelho.ConcelhoDAO;
+import com.clinica.api.district.District;
 import com.clinica.api.district.DistrictDAO;
 import com.clinica.api.exceptions.ResourceNotFoundException;
 import com.clinica.api.marketing.Marketing;
@@ -20,6 +22,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.Date;
