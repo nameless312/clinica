@@ -65,12 +65,12 @@ public class Client {
     private String notes;
 
     @Column(name = "gender")
-    private String gender;
+    private Gender gender;
     @Column(name = "ssn")
     private String ssn;
 
     @Column(name = "dt_added", nullable = false)
-    private Timestamp dtAdded;
+    private Timestamp dtAdded = new Timestamp(System.currentTimeMillis());;
 
     @Column(name = "dt_update")
     private Timestamp dtUpdate;
@@ -83,6 +83,7 @@ public class Client {
         PartnershipDTO partnershipDTO = partnership != null ? partnership.toDTO() : null;
         MarketingDTO marketingDTO = marketing != null ? marketing.toDTO() : null;
         Date bdate = birthdate != null ? new Date(birthdate.getTime()) : null;
+        String genderString = gender != null ? gender.toString() : null;
         return new ClientDTO(
                 clientId,
                 addressDTO,
@@ -96,7 +97,7 @@ public class Client {
                 mobile,
                 lanline,
                 notes,
-                gender,
+                genderString,
                 ssn
         );
     }

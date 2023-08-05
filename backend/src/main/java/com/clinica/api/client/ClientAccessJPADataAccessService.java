@@ -12,7 +12,6 @@ public class ClientAccessJPADataAccessService implements ClientDAO {
 
     public ClientAccessJPADataAccessService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
-
     }
     @Override
     public Optional<Client> selectClientById(Integer id) {
@@ -25,7 +24,12 @@ public class ClientAccessJPADataAccessService implements ClientDAO {
     }
 
     @Override
-    public void insertClient(Client client) {
+    public Client insertClient(Client client) {
+        return clientRepository.save(client);
+    }
+
+    @Override
+    public void updateClient(Client client) {
         clientRepository.save(client);
     }
 }

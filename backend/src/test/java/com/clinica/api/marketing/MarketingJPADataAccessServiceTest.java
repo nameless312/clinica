@@ -1,4 +1,4 @@
-package com.clinica.api.client;
+package com.clinica.api.marketing;
 
 import com.clinica.api.testcontainers.AbstractTestcontainers;
 import org.junit.jupiter.api.AfterEach;
@@ -14,16 +14,16 @@ import static org.mockito.Mockito.verify;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class ClientJPADataAccessServiceTest extends AbstractTestcontainers {
-    private ClientAccessJPADataAccessService underTest;
+public class MarketingJPADataAccessServiceTest extends AbstractTestcontainers {
+    private MarketingAccessJPADataAccessService underTest;
     private AutoCloseable autoCloseable;
     @Mock
-    private ClientRepository clientRepository;
+    private MarketingRepository marketingRepository;
 
     @BeforeEach
     void setUp() {
         autoCloseable = MockitoAnnotations.openMocks(this);
-        underTest = new ClientAccessJPADataAccessService(clientRepository);
+        underTest = new MarketingAccessJPADataAccessService(marketingRepository);
     }
 
     @AfterEach
@@ -32,46 +32,46 @@ public class ClientJPADataAccessServiceTest extends AbstractTestcontainers {
     }
 
     @Test
-    void selectAllClients() {
+    void selectAllMarketingChannels() {
         // When
-        underTest.selectAllClients();
+        underTest.selectMarketingChannels();
 
         // Then
-        verify(clientRepository).findAll();
+        verify(marketingRepository).findAll();
     }
 
     @Test
-    void selectClientById() {
+    void selectMarketingChannelById() {
         // Given
         int id = 1;
 
         // When
-        underTest.selectClientById(id);
+        underTest.selectMarketingChannelById(id);
 
         // Then
-        verify(clientRepository).findById(id);
+        verify(marketingRepository).findById(id);
     }
 
     @Test
-    void insertClient() {
+    void insertMarketingChannel() {
         // Given
-        Client client = new Client();
+        Marketing marketing = new Marketing();
 
         // When
-        underTest.insertClient(client);
+        underTest.insertMarketingChannel(marketing);
 
         // Then
-        verify(clientRepository).save(client);
+        verify(marketingRepository).save(marketing);
     }
     @Test
-    void updateClient() {
+    void updateMarketingChannel() {
         // Given
-        Client client = new Client();
+        Marketing marketing = new Marketing();
 
         // When
-        underTest.updateClient(client);
+        underTest.updateMarketingChannel(marketing);
 
         // Then
-        verify(clientRepository).save(client);
+        verify(marketingRepository).save(marketing);
     }
 }
