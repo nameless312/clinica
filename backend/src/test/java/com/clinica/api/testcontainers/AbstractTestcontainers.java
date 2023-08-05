@@ -2,6 +2,7 @@ package com.clinica.api.testcontainers;
 
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -9,8 +10,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
+@DirtiesContext
 public abstract class AbstractTestcontainers {
-
     @BeforeAll
     static void beforeAll() {
         Flyway flyway = Flyway
@@ -26,8 +27,8 @@ public abstract class AbstractTestcontainers {
     @Container
     protected static final PostgreSQLContainer<?> postgreSQLContainer =
             new PostgreSQLContainer<>("postgres:latest")
-                    .withDatabaseName("cilinica-dao-unit-test")
-                    .withUsername("amigoscode")
+                    .withDatabaseName("clinica-dao-unit-test")
+                    .withUsername("nameless")
                     .withPassword("password");
 
     @DynamicPropertySource
@@ -36,8 +37,7 @@ public abstract class AbstractTestcontainers {
         registry.add(
                 "spring.datasource.url",
                 postgreSQLContainer::getJdbcUrl
-        );
-        registry.add(
+        );        registry.add(
                 "spring.datasource.username",
                 postgreSQLContainer::getUsername
         );

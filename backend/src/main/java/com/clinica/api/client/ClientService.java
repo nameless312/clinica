@@ -1,6 +1,8 @@
 package com.clinica.api.client;
 
 import com.clinica.api.address.Address;
+
+import com.clinica.api.address.AddressService;
 import com.clinica.api.address.AddressDAO;
 import com.clinica.api.address.AddressRepository;
 import com.clinica.api.address.AddressService;
@@ -94,7 +96,7 @@ public class ClientService {
         Marketing marketing = null;
         Integer marketingId = newClient.marketingId();
         if (marketingId != null) {
-            marketing = marketingDAO.selectMarketingById(marketingId)
+            marketing = marketingDAO.selectMarketingChannelById(marketingId)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("marketing with id [%s] not found".formatted(marketingId))
                 );
@@ -142,7 +144,7 @@ public class ClientService {
         Integer marketingId = clientToUpdate.marketingId();
         if (marketingId != null &&
                 (client.getPartnership() == null || !marketingId.equals(client.getPartnership().getPartnershipId()))) {
-            Marketing marketing = marketingDAO.selectMarketingById(marketingId)
+            Marketing marketing = marketingDAO.selectMarketingChannelById(marketingId)
                     .orElseThrow(
                             () -> new ResourceNotFoundException("marketing with id [%s] not found".formatted(marketingId))
                     );
