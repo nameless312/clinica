@@ -1,8 +1,16 @@
 package com.clinica.api.client;
 
 import com.clinica.api.address.Address;
+
 import com.clinica.api.address.AddressService;
+import com.clinica.api.address.AddressDAO;
+import com.clinica.api.address.AddressRepository;
 import com.clinica.api.client.inputs.NewClient;
+import com.clinica.api.client.inputs.NewClientAddress;
+import com.clinica.api.concelho.Concelho;
+import com.clinica.api.concelho.ConcelhoDAO;
+import com.clinica.api.district.District;
+import com.clinica.api.district.DistrictDAO;
 import com.clinica.api.exceptions.ResourceNotFoundException;
 import com.clinica.api.marketing.Marketing;
 import com.clinica.api.marketing.MarketingDAO;
