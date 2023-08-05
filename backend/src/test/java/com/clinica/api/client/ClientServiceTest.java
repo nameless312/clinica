@@ -1,11 +1,9 @@
 package com.clinica.api.client;
 
 import com.clinica.api.address.Address;
-import com.clinica.api.address.AddressDAO;
 import com.clinica.api.address.AddressService;
 import com.clinica.api.client.inputs.NewClient;
 import com.clinica.api.concelho.ConcelhoDAO;
-import com.clinica.api.district.District;
 import com.clinica.api.district.DistrictDAO;
 import com.clinica.api.exceptions.ResourceNotFoundException;
 import com.clinica.api.marketing.Marketing;
@@ -22,7 +20,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.Date;
@@ -128,7 +125,7 @@ class ClientServiceTest {
         // When
         when(userDAO.selectUserById(request.userId())).thenReturn(Optional.of(user));
         when(partnershipDAO.selectPartnershipById(request.partnershipId())).thenReturn(Optional.of(partnership));
-        when(marketingDAO.selectMarketingById(request.marketingId())).thenReturn(Optional.of(marketing));
+        when(marketingDAO.selectMarketingChannelById(request.marketingId())).thenReturn(Optional.of(marketing));
         when(addressService.insertNewAddress(user, request.address())).thenReturn(address);
         underTest.insertClient(request);
 
@@ -184,7 +181,7 @@ class ClientServiceTest {
 
         // When
         when(userDAO.selectUserById(request.userId())).thenReturn(Optional.of(user));
-        when(marketingDAO.selectMarketingById(request.marketingId())).thenReturn(Optional.of(marketing));
+        when(marketingDAO.selectMarketingChannelById(request.marketingId())).thenReturn(Optional.of(marketing));
         when(addressService.insertNewAddress(user, request.address())).thenReturn(address);
         underTest.insertClient(request);
 
@@ -339,7 +336,7 @@ class ClientServiceTest {
         // When
         when(userDAO.selectUserById(request.userId())).thenReturn(Optional.of(user));
         when(partnershipDAO.selectPartnershipById(request.partnershipId())).thenReturn(Optional.of(partnership));
-        when(marketingDAO.selectMarketingById(request.marketingId())).thenReturn(Optional.empty());
+        when(marketingDAO.selectMarketingChannelById(request.marketingId())).thenReturn(Optional.empty());
 
         // Then
         assertThatThrownBy(() -> {
