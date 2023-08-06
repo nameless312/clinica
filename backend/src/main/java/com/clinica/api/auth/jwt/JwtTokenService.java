@@ -23,10 +23,11 @@ public class JwtTokenService {
         this.verifier = JWT.require(this.hmac512).build();
     }
 
-    public String generateToken(String email) {
+    public String generateToken(String email, Integer userId) {
         final Instant now = Instant.now();
         return JWT.create()
                 .withSubject(email)
+                .withClaim("userid", userId)
                 .withIssuer("app")
                 .withIssuedAt(now)
                 .withExpiresAt(now.plusMillis(tokenValidity.toMillis()))

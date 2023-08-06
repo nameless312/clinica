@@ -1,8 +1,6 @@
 package com.clinica.api.partnership;
 
 import com.clinica.api.exceptions.ResourceNotFoundException;
-import com.clinica.api.marketing.input.NewMarketingChannel;
-import com.clinica.api.marketing.input.UpdateMarketingChannel;
 import com.clinica.api.partnership.input.NewPartnership;
 import com.clinica.api.partnership.input.UpdatePartnership;
 import com.clinica.api.user.User;

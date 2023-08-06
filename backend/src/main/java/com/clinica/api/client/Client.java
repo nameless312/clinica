@@ -64,6 +64,7 @@ public class Client {
     @Column(name = "notes")
     private String notes;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private Gender gender;
     @Column(name = "ssn")
