@@ -9,18 +9,21 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 @Service
 public class JwtTokenService {
 
-    private Duration tokenValidity = Duration.ofHours(12);
-
+    private final Duration tokenValidity;
     private final Algorithm hmac512;
     private final JWTVerifier verifier;
 
-    public JwtTokenService(@Value("${jwt.secret}") final String secret) {
+    public JwtTokenService(@Value("${jwt.secret}") final String secret,
+                           @Value("${jwt.token.validity.duration}") final Integer tokenDuration,
+                           @Value("${jwt.token.validity.unit}") final String durationUnit) {
         this.hmac512 = Algorithm.HMAC512(secret);
         this.verifier = JWT.require(this.hmac512).build();
+        this.tokenValidity = Duration.of(tokenDuration, ChronoUnit.valueOf(durationUnit));
     }
 
     public String generateToken(String email, Integer userId) {
@@ -41,10 +44,6 @@ public class JwtTokenService {
             //log.warn("token invalid: {}", verificationEx.getMessage());
             return null;
         }
-    }
-
-    public void setTokenValidity(Duration tokenValidity) {
-        this.tokenValidity = tokenValidity;
     }
 
 }

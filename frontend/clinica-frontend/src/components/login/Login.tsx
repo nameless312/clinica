@@ -1,5 +1,5 @@
 import { Alert, AlertIcon, Box, Button, FormLabel, Heading, Input, Stack } from '@chakra-ui/react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom';

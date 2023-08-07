@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
-import { getUser, performLogin } from "../services/client";
+import { getUser, performLogin } from "../../services/client";
 import jwt_decode from "jwt-decode";
 import jwtDecode from "jwt-decode";
 
@@ -18,7 +18,7 @@ interface User {
 
 interface AuthProviderProps {
     children: React.ReactNode
-  }
+}
 
 interface AuthContextType {
     user: User | null
@@ -38,22 +38,22 @@ const AuthContext = createContext<AuthContextType>({
 
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }: PropsWithChildren<{}>) => {
-
     const [user, setUser] = useState<User | null>(null)
 
     const setUserFromToken = async () => {
-        let token = localStorage.getItem("token");
+        const token: string | null = localStorage.getItem("token");
         if (token) {
-            const decodedToken: any = jwtDecode(token);
+            const decodedToken: any = jwt_decode(token);
             const userId: number = decodedToken.userid;
             const userRes = await getUser(userId);
             const userObj: User = userRes.data;
             setUser(userObj);
         }
     }
+
     useEffect(() => {
-        setUserFromToken()
-    }, [])
+        setUserFromToken();
+    }, []);
 
 
     const login = async (credentials: Credentials) => {
