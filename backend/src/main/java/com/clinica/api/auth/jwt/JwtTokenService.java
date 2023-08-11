@@ -46,4 +46,8 @@ public class JwtTokenService {
         }
     }
 
+    public long getTokenValidityInSeconds() {
+        return tokenValidity.toSeconds();
+    }
+
 }
