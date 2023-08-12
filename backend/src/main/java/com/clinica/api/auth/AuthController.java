@@ -26,11 +26,14 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse response) {
+    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
         TokenOutput token = authService.authenticate(loginRequest);
         Cookie cookie = new Cookie("Authorization", token.token());
         cookie.setMaxAge((int) token.duration());
         cookie.setPath("/");
+        cookie.setAttribute("SameSite","None");
+        cookie.setSecure(true);
+        cookie.setDomain("localhost");
         response.addCookie(cookie);
 
         return ResponseEntity.ok().build();
