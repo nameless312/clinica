@@ -8,6 +8,15 @@ async function fetchWithAuth(url: string, options: RequestInit = {}): Promise<Re
   return await fetch(url, options);
 }
 
+async function fetchWithAuthAndCookie(url: string, options: RequestInit = {}, token: string): Promise<Response> {
+  options.headers = {
+    ...options.headers,
+    Authorization: `Bearer ${token}`
+  };
+
+  return await fetch(url, options);
+}
+
 function getAuthorizationToken(): string | null {
   // Implement this function to retrieve the token from the cookie
   const cookie = document.cookie;
@@ -20,4 +29,4 @@ function getAuthorizationToken(): string | null {
   }
 }
 
-export {fetchWithAuth};
+export {fetchWithAuth, fetchWithAuthAndCookie};

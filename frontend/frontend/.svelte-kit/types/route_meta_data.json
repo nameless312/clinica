@@ -1,0 +1,7 @@
+{
+	"/": [],
+	"/dashboard": [],
+	"/login": [
+		"src/routes/login/+page.server.ts"
+	]
+}
