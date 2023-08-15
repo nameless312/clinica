@@ -1,6 +1,9 @@
 {
 	"/(app)": [],
 	"/": [],
+	"/(app)/client/[id]": [
+		"src/routes/(app)/client/[id]/+page.server.ts"
+	],
 	"/(app)/dashboard": [],
 	"/login": [
 		"src/routes/login/+page.server.ts"

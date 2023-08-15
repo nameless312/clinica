@@ -27,4 +27,8 @@ public class District {
 
     @Column(name = "dt_update")
     private Timestamp dtUpdate;
+
+    public DistrictDTO toDTO() {
+        return new DistrictDTO(districtId, districtName);
+    }
 }

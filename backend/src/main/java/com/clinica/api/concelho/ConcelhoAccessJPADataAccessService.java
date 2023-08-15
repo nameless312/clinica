@@ -2,6 +2,7 @@ package com.clinica.api.concelho;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository("ConcelhoJPA")
@@ -15,4 +16,11 @@ public class ConcelhoAccessJPADataAccessService implements ConcelhoDAO {
     public Optional<Concelho> selectConcelhoById(Integer id) {
         return concelhoRepository.findById(id);
     }
+
+    @Override
+    public List<Concelho> selectAllConcelhos() {
+        return concelhoRepository.findAll();
+    }
+
+
 }

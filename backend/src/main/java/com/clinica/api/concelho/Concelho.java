@@ -32,4 +32,8 @@ public class Concelho {
 
     @Column(name = "dt_update")
     private Timestamp dtUpdate;
+
+    public ConcelhoDTO toDTO() {
+        return new ConcelhoDTO(concelhoId, district.getDistrictId(), concelhoName);
+    }
 }

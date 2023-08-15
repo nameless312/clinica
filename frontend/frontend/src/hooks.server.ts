@@ -1,4 +1,4 @@
-import {fetchWithAuthAndCookie} from './utils/utils';
+import {fetchWithAuth} from './utils/utils';
 import {authStore} from './stores/authStore';
 import {redirect} from '@sveltejs/kit';
 
@@ -50,7 +50,7 @@ async function getUserPayload(cookie: string): Promise<Payload | null> {
   try {
     const id = getUserIdFromToken(cookie);
     if (id) {
-      const response = await fetchWithAuthAndCookie(`${import.meta.env.VITE_BASE_API_URL}/user/${id}`, {
+      const response = await fetchWithAuth(`${import.meta.env.VITE_BASE_API_URL}/user/${id}`, {
         method: 'GET',
       }, cookie);
       if (response.ok) {
