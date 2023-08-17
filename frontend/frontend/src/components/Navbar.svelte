@@ -1,23 +1,34 @@
-<script>
-  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Input } from 'flowbite-svelte';
-  import { Icon } from 'flowbite-svelte-icons';
+<script lang="ts">
+  import {AppBar, drawerStore} from '@skeletonlabs/skeleton';
+
+  function drawerOpen(): void {
+    drawerStore.open({width: 'w-[240px]'});
+  }
 </script>
 
-<Navbar let:hidden let:toggle class="h-16 border-b-2">
-	<NavBrand href="/dashboard" class="items-start">
-		<img src="/images/flowbite-svelte-icon-logo.svg" class="mr-3 h-6 sm:h-9" alt="Clinica Logo"/>
-	</NavBrand>
-	<div class="items-center">
-		<div class="relative">
-			<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-				<Icon name="search-outline" class="w-4 h-4"/>
-			</div>
-			<Input id="search-navbar" class="pl-10 mr-60" placeholder="Pesquisar por Nome de cliente, Nif ou Telemóvel"/>
+<AppBar gridColumns="grid-cols-3" padding="p-4" slotTrail="place-content-end"
+        background="bg-primary-100">
+	<svelte:fragment slot="lead">
+		<div class="flex items-center">
+			<button class="md:hidden btn btn-sm mr-4" on:click={drawerOpen}>
+				<i class="fa-solid fa-bars"></i>
+			</button>
+			<a href="/dashboard">
+				<strong class="text-xl invisible md:visible">Clinica Joana Andrade</strong>
+			</a>
 		</div>
-		<Button color="none" data-collapse-toggle="mobile-menu-3" aria-controls="mobile-menu-3" aria-expanded="false"
-		        class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 ml-1">
-			<Icon name="search-outline" class="w-5 h-5"/>
-		</Button>
+	</svelte:fragment>
+	<div class="input-group md:grid-cols-[1rem_1fr] sm:grid-cols-[1rem_1fr]">
+		<div class="input-group-shim">
+			<i class="fa-solid fa-search"/>
+		</div>
+		<div class="p-0">
+			<input type="search" class="input" placeholder="Pesquisar por Nome de Cliente, Nif ou Telemovel">
+		</div>
 	</div>
-	<div class="items-end">tsrat</div>
-</Navbar>
+	<svelte:fragment slot="trail">
+		<div class="invisible md:visible">
+			Utilizador
+		</div>
+	</svelte:fragment>
+</AppBar>

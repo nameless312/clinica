@@ -10,8 +10,10 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
+    "@skeletonlabs/skeleton": "^1.12.0",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.22.5",
+    "@tailwindcss/forms": "^0.5.4",
     "@tsconfig/svelte": "^5.0.0",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
@@ -25,9 +27,7 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.5.1",
-    "flowbite": "^1.8.1",
-    "flowbite-svelte": "^0.43.1",
-    "flowbite-svelte-icons": "^0.3.6",
+    "@fortawesome/fontawesome-free": "^6.4.2",
     "tailwind-merge": "^1.14.0"
   }
 }
