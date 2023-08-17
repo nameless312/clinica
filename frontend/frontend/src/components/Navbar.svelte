@@ -1,6 +1,8 @@
 <script lang="ts">
   import {AppBar, drawerStore} from '@skeletonlabs/skeleton';
 
+  import {page} from '$app/stores';
+
   function drawerOpen(): void {
     drawerStore.open({width: 'w-[240px]'});
   }
@@ -28,7 +30,7 @@
 	</div>
 	<svelte:fragment slot="trail">
 		<div class="invisible md:visible">
-			Utilizador
+			{$page.data.user.firstName} {$page.data.user.lastName}
 		</div>
 	</svelte:fragment>
 </AppBar>

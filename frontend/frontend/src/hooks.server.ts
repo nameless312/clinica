@@ -1,10 +1,9 @@
 import {fetchWithAuth} from './utils/utils';
-import {authStore} from './stores/authStore';
 import {redirect} from '@sveltejs/kit';
 
 const unProtectedRoutes = ['/login'];
 
-export const handle = async ({event, request, resolve}) => {
+export const handle = async ({event, resolve}) => {
   const authorization = event.cookies.get('Authorization');
   if (!authorization && !unProtectedRoutes.includes(event.url.pathname)) {
     // User is not authenticated and trying to access a protected route
@@ -17,13 +16,9 @@ export const handle = async ({event, request, resolve}) => {
   }
 
   if (authorization) {
-    const user: Payload | null = await getUserPayload(authorization);
+    const user: User | null = await getUserPayload(authorization);
     if (user) {
-      authStore.update((store) => ({
-        ...store,
-        isAuthenticated: true,
-        user: user,
-      }));
+      event.locals.user = user;
     } else {
       if (!unProtectedRoutes.includes(event.url.pathname)) {
         throw redirect(302, '/login');
@@ -34,19 +29,20 @@ export const handle = async ({event, request, resolve}) => {
   const query = event.url.searchParams.get('logout');
   if (Boolean(query) == true) {
     await event.cookies.delete('authorization');
+    event.locals.user = null;
     throw redirect(302, '/login');
   }
   return resolve(event);
 };
 
-interface Payload {
+interface User {
   userId: string;
   firstName: string;
   lastName: string;
   email: string;
 }
 
-async function getUserPayload(cookie: string): Promise<Payload | null> {
+async function getUserPayload(cookie: string): Promise<User | null> {
   try {
     const id = getUserIdFromToken(cookie);
     if (id) {

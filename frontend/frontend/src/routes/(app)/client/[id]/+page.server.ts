@@ -1,3 +1,4 @@
+// @ts-ignore
 import {fetchWithAuth} from '@/utils/utils';
 
 export async function load({params, cookies}) {
