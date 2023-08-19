@@ -1,5 +1,5 @@
 <script>
-  import ClientCard from '@/components/client/ClientCard.svelte';
+  import ClientCard from '@/lib/components/client/ClientCard.svelte';
 
   export let data;
 </script>

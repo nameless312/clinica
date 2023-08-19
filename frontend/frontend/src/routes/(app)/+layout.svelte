@@ -1,7 +1,12 @@
 <script lang="ts">
-  import Sidebar from '@/components/Sidebar.svelte';
-  import Navbar from '@/components/Navbar.svelte';
+  import Sidebar from '@/lib/components/Sidebar.svelte';
+  import Navbar from '@/lib/components/Navbar.svelte';
   import {AppShell, Drawer} from '@skeletonlabs/skeleton';
+
+  import {storePopup} from '@skeletonlabs/skeleton';
+  import {computePosition, autoUpdate, flip, shift, offset, arrow} from '@floating-ui/dom';
+
+  storePopup.set({computePosition, flip, shift, offset, arrow, autoUpdate});
 </script>
 
 <Drawer>
@@ -18,15 +23,4 @@
 	<div class="container p-10 mx-auto">
 		<slot/>
 	</div>
-
 </AppShell>
-
-<!--<div>-->
-<!--	<Navbar/>-->
-<!--	<div>-->
-<!--		<Sidebar bind:sidebarClosed class="sidebar"/>-->
-<!--		<div class="{sidebarClosed ? '' : 'open'}">-->
-<!--			<slot/>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--</div>-->

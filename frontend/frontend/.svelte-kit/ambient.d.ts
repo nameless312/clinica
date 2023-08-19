@@ -58,6 +58,7 @@ declare module '$env/static/private' {
 	export const GTK_MODULES: string;
 	export const XDG_SEAT: string;
 	export const PWD: string;
+	export const GSETTINGS_SCHEMA_DIR: string;
 	export const XDG_SESSION_DESKTOP: string;
 	export const LOGNAME: string;
 	export const QT_QPA_PLATFORMTHEME: string;
@@ -66,7 +67,6 @@ declare module '$env/static/private' {
 	export const SYSTEMD_EXEC_PID: string;
 	export const _: string;
 	export const XAUTHORITY: string;
-	export const DESKTOP_STARTUP_ID: string;
 	export const MOTD_SHOWN: string;
 	export const GTK2_RC_FILES: string;
 	export const HOME: string;
@@ -129,7 +129,9 @@ declare module '$env/static/private' {
 	export const KDE_APPLICATIONS_AS_SCOPE: string;
 	export const NVM_BIN: string;
 	export const MAIL: string;
+	export const GIO_LAUNCHED_DESKTOP_FILE_PID: string;
 	export const npm_node_execpath: string;
+	export const GIO_LAUNCHED_DESKTOP_FILE: string;
 	export const LC_NUMERIC: string;
 	export const OLDPWD: string;
 	export const NODE_ENV: string;
@@ -194,6 +196,7 @@ declare module '$env/dynamic/private' {
 		GTK_MODULES: string;
 		XDG_SEAT: string;
 		PWD: string;
+		GSETTINGS_SCHEMA_DIR: string;
 		XDG_SESSION_DESKTOP: string;
 		LOGNAME: string;
 		QT_QPA_PLATFORMTHEME: string;
@@ -202,7 +205,6 @@ declare module '$env/dynamic/private' {
 		SYSTEMD_EXEC_PID: string;
 		_: string;
 		XAUTHORITY: string;
-		DESKTOP_STARTUP_ID: string;
 		MOTD_SHOWN: string;
 		GTK2_RC_FILES: string;
 		HOME: string;
@@ -265,7 +267,9 @@ declare module '$env/dynamic/private' {
 		KDE_APPLICATIONS_AS_SCOPE: string;
 		NVM_BIN: string;
 		MAIL: string;
+		GIO_LAUNCHED_DESKTOP_FILE_PID: string;
 		npm_node_execpath: string;
+		GIO_LAUNCHED_DESKTOP_FILE: string;
 		LC_NUMERIC: string;
 		OLDPWD: string;
 		NODE_ENV: string;
