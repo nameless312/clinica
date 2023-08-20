@@ -23,6 +23,7 @@
   let inputSearch = '';
 
   function onPopupInputSelect(event: any): void {
+    inputSearch = '';
     goto(`/client/${event.detail.value.clientID}`);
   }
 
@@ -54,7 +55,7 @@
 			/>
 			<i class="fa-solid fa-search absolute left-2 top-1/2 transform -translate-y-1/2 text-primary-300 pl-1 pt-1"/>
 			<div data-popup="popupAutocomplete"
-			     class="absolute mt-1 bg-white border border-gray-300 shadow-lg overflow-y-auto rounded-lg z-10"
+			     class="absolute mt-1 bg-white border border-primary-100 shadow-lg overflow-y-auto rounded-lg z-10 max-h-48"
 			>
 				<Autocomplete
 					bind:input={inputSearch}

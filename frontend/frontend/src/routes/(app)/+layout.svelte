@@ -13,7 +13,7 @@
 	<Sidebar/>
 </Drawer>
 
-<AppShell slotSidebarLeft="bg-surface-100 w-0 md:w-52">
+<AppShell slotSidebarLeft="bg-surface-100 w-0 md:w-52" class="h-screen">
 	<svelte:fragment slot="header">
 		<Navbar/>
 	</svelte:fragment>

@@ -231,4 +231,18 @@
 <!--	</div>-->
 <!--</div>-->
 
+<script>
+  export let data;
+</script>
 
+<div class="grid grid-cols-3 gap-3">
+	<div class="card h-full bg-surface-400 col-span-1">
+		<header class="card-header">{data.props.data.client.fullName}</header>
+		<hr class=" my-4 w-4/5 ml-4">
+		<section class="p-4">(content)</section>
+	</div>
+	<div class="card h-full bg-primary-100 col-span-2">
+		<header class="card-header">{data.props.data.client.fullName}</header>
+		<section class="p-4">(content)</section>
+	</div>
+</div>

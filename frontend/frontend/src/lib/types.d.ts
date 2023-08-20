@@ -1,6 +1,17 @@
 // types.d.ts
 
-export interface Address {
+export type District = {
+  districtId: number,
+  districtName: string
+}
+
+export type Concelho = {
+  concelhoId: number,
+  districtId: number,
+  concelhoName: string
+}
+
+export type Address = {
   addressID: number;
   districtId: number;
   districtName: string;
@@ -12,7 +23,7 @@ export interface Address {
   locality: string;
 }
 
-export interface Partnership {
+export type Partnership = {
   partnershipID: number;
   partner: string;
   locality: string;
@@ -21,7 +32,7 @@ export interface Partnership {
   job: string;
 }
 
-export interface Marketing {
+export type Marketing = {
   marketingID: number;
   marketingChannel: string;
 }
@@ -31,7 +42,7 @@ export enum Gender {
   FEMALE
 }
 
-export interface Client {
+export type Client = {
   clientID: number;
   address: Address;
   partnership?: Partnership;
