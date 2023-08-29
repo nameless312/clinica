@@ -1,3 +1,5 @@
+import {Gender} from '$lib/types';
+
 async function fetchWithAuth(url: string, options: RequestInit = {}, token: string): Promise<Response> {
   options.headers = {
     ...options.headers,
@@ -27,34 +29,73 @@ function formatDateToDDMMYYYY(dateStr: string) {
   return `${day}/${month}/${year}`;
 }
 
-function calculateAge(birthdate: string) {
-  const birthDate = new Date(birthdate);
-
+function calculateAge(birthdate: Date) {
   const today = new Date();
-  const age = today.getFullYear() - birthDate.getFullYear();
+  const age = today.getFullYear() - birthdate.getFullYear();
 
   // Adjust age if birthday hasn't occurred yet this year
-  const birthMonth = birthDate.getMonth();
+  const birthMonth = birthdate.getMonth();
   const todayMonth = today.getMonth();
-  if (todayMonth < birthMonth || (todayMonth === birthMonth && today.getDate() < birthDate.getDate())) {
+  if (todayMonth < birthMonth || (todayMonth === birthMonth && today.getDate() < birthdate.getDate())) {
     return age - 1;
   }
 
   return age;
 }
 
-function parseDDMMYYYYToDate(dateString) {
-  const parts = dateString.split('/');
-  if (parts.length === 3) {
-    const day = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10) - 1; // Month is 0-indexed in JavaScript Date
-    const year = parseInt(parts[2], 10);
+function parseYYYYMMDDToDate(date: string): Date | null {
+  const dateParts = date.split('-');
+  if (dateParts.length === 3) {
+    const year = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10);
+    const day = parseInt(dateParts[2], 10);
 
-    return new Date(year, month, day);
-  } else {
-    throw new Error('Invalid date format');
+
+    if (!isNaN(month) && !isNaN(day) && !isNaN(year)) {
+      // Note: Months in JavaScript Date are 0-based, so we subtract 1 from the month
+      return new Date(year, month - 1, day);
+    }
   }
+
+  // If the input date string is not in the expected format, return null or handle the error as needed.
+  return null;
 }
 
 
-export {fetchWithAuth, getAuthorizationToken, formatDateToDDMMYYYY, parseDDMMYYYYToDate, calculateAge};
+function formatDateToYYYYMMDD(date: Date) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Add 1 because months are zero-based
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function translateGender(gender: Gender) {
+  if (gender === Gender.MALE) {
+    return 'Masculino';
+  } else if (gender === Gender.FEMALE) {
+    return 'Feminino';
+  } else {
+    return 'Outro';
+  }
+}
+
+function reverseTranslateGender(gender: string): Gender {
+  if (gender.toLowerCase() === 'masculino') {
+    return Gender.MALE;
+  } else if (gender.toLowerCase() === 'feminino') {
+    return Gender.FEMALE;
+  } else {
+    return Gender.OTHER;
+  }
+}
+
+export {
+  fetchWithAuth,
+  getAuthorizationToken,
+  formatDateToYYYYMMDD,
+  formatDateToDDMMYYYY,
+  parseYYYYMMDDToDate,
+  calculateAge,
+  translateGender,
+  reverseTranslateGender
+};
