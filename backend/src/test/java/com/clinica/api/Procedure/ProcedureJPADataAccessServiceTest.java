@@ -1,8 +1,8 @@
-package com.clinica.api.Partnership;
+package com.clinica.api.Procedure;
 
-import com.clinica.api.partnership.Partnership;
-import com.clinica.api.partnership.PartnershipAccessJPADataAccessService;
-import com.clinica.api.partnership.PartnershipRepository;
+import com.clinica.api.procedures.Procedure;
+import com.clinica.api.procedures.ProcedureAccessJPADataAccessService;
+import com.clinica.api.procedures.ProcedureRepository;
 import com.clinica.api.testcontainers.AbstractTestcontainers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,16 +16,16 @@ import static org.mockito.Mockito.verify;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class PartnershipJPADataAccessServiceTest extends AbstractTestcontainers {
-    private PartnershipAccessJPADataAccessService underTest;
+public class ProcedureJPADataAccessServiceTest extends AbstractTestcontainers {
+    private ProcedureAccessJPADataAccessService underTest;
     private AutoCloseable autoCloseable;
     @Mock
-    private PartnershipRepository partnershipRepository;
+    private ProcedureRepository procedureRepository;
 
     @BeforeEach
     void setUp() {
         autoCloseable = MockitoAnnotations.openMocks(this);
-        underTest = new PartnershipAccessJPADataAccessService(partnershipRepository);
+        underTest = new ProcedureAccessJPADataAccessService(procedureRepository);
     }
 
     @AfterEach
@@ -34,46 +34,46 @@ public class PartnershipJPADataAccessServiceTest extends AbstractTestcontainers 
     }
 
     @Test
-    void selectAllPartnerships() {
+    void selectAllProcedures() {
         // When
-        underTest.selectPartnerships();
+        underTest.selectProcedures();
 
         // Then
-        verify(partnershipRepository).findAll();
+        verify(procedureRepository).findAll();
     }
 
     @Test
-    void selectPartnershipById() {
+    void selectProcedureById() {
         // Given
         int id = 1;
 
         // When
-        underTest.selectPartnershipById(id);
+        underTest.selectProcedureById(id);
 
         // Then
-        verify(partnershipRepository).findById(id);
+        verify(procedureRepository).findById(id);
     }
 
     @Test
     void insertPartnership() {
         // Given
-        Partnership partnership = new Partnership();
+        Procedure procedure = new Procedure();
 
         // When
-        underTest.insertPartnership(partnership);
+        underTest.insertProcedure(procedure);
 
         // Then
-        verify(partnershipRepository).save(partnership);
+        verify(procedureRepository).save(procedure);
     }
     @Test
     void updateMarketingChannel() {
         // Given
-        Partnership partnership = new Partnership();
+        Procedure procedure = new Procedure();
 
         // When
-        underTest.updatePartnership(partnership);
+        underTest.updateProcedure(procedure);
 
         // Then
-        verify(partnershipRepository).save(partnership);
+        verify(procedureRepository).save(procedure);
     }
 }

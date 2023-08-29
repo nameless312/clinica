@@ -1,4 +1,4 @@
-// types.d.ts
+// types.ts
 
 export type District = {
   districtId: number,
@@ -19,6 +19,7 @@ export type Address = {
   concelhoName: string;
   streetName: string;
   city: string;
+  country: string;
   zipCode: string;
   locality: string;
 }
@@ -39,7 +40,8 @@ export type Marketing = {
 
 export enum Gender {
   MALE,
-  FEMALE
+  FEMALE,
+  OTHER
 }
 
 export type Client = {

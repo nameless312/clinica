@@ -1,6 +1,6 @@
 // @ts-ignore
 import {fetchWithAuth} from '@/utils/utils';
-import type {Client, Concelho, District} from '$lib/types';
+import type {Client, Concelho, District, Marketing, Partnership} from '$lib/types';
 
 export async function load({params, cookies}) {
   const token = cookies.get('Authorization');
@@ -19,13 +19,25 @@ export async function load({params, cookies}) {
     method: 'GET'
   }, token);
   const concelho: Concelho = await concelhoResponse.json();
-  
+
+  const partnershipResponse = await fetchWithAuth(`${import.meta.env.VITE_BASE_API_URL}/partnership`, {
+    method: 'GET'
+  }, token);
+  const partnership: Partnership = await partnershipResponse.json();
+
+  const marketingResponse = await fetchWithAuth(`${import.meta.env.VITE_BASE_API_URL}/marketing`, {
+    method: 'GET'
+  }, token);
+  const marketing: Marketing = await marketingResponse.json();
+
   return {
     props: {
       data: {
         client,
         district,
-        concelho
+        concelho,
+        partnership,
+        marketing
       }
     }
   };

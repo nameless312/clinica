@@ -8,7 +8,8 @@ module.exports = {
     require('path').join(require.resolve(
         '@skeletonlabs/skeleton'),
       '../**/*.{html,js,svelte,ts}'
-    )
+    ),
+    './node_modules/stwui/**/*.{svelte,js,ts,html}'
   ],
   theme: {
     extend: {},
@@ -16,6 +17,7 @@ module.exports = {
   plugins: [
     // 3. Append the Skeleton plugin to the end of this list
     require('@tailwindcss/forms'),
-    ...require('@skeletonlabs/skeleton/tailwind/skeleton.cjs')()
+    ...require('@skeletonlabs/skeleton/tailwind/skeleton.cjs')(),
+    require('stwui/plugin')
   ]
 };

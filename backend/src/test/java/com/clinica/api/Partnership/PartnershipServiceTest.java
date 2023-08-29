@@ -1,11 +1,6 @@
 package com.clinica.api.Partnership;
 
 import com.clinica.api.exceptions.ResourceNotFoundException;
-import com.clinica.api.marketing.Marketing;
-import com.clinica.api.marketing.MarketingDTO;
-import com.clinica.api.marketing.MarketingService;
-import com.clinica.api.marketing.input.NewMarketingChannel;
-import com.clinica.api.marketing.input.UpdateMarketingChannel;
 import com.clinica.api.partnership.Partnership;
 import com.clinica.api.partnership.PartnershipDAO;
 import com.clinica.api.partnership.PartnershipDTO;
@@ -133,7 +128,7 @@ class PartnershipServiceTest {
 
         // When
         // Then
-        assertThatThrownBy(() -> underTest.updateParthenship(updatePartnership))
+        assertThatThrownBy(() -> underTest.updatePartnership(updatePartnership))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("partnership with id [%s] not found".formatted(id));
     }
@@ -161,7 +156,7 @@ class PartnershipServiceTest {
         when(partnershipDAO.selectPartnershipById(id)).thenReturn(Optional.of(partnership));
 
         // Call the method to be tested
-        underTest.updateParthenship(request);
+        underTest.updatePartnership(request);
 
         // Then
         ArgumentCaptor<Partnership> partnershipArgumentCaptor = ArgumentCaptor.forClass(Partnership.class);

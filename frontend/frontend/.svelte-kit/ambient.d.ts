@@ -45,6 +45,7 @@ declare module '$env/static/private' {
 	export const LC_NAME: string;
 	export const SSH_AUTH_SOCK: string;
 	export const P9K_TTY: string;
+	export const MEMORY_PRESSURE_WRITE: string;
 	export const TERM_SESSION_ID: string;
 	export const COLOR: string;
 	export const npm_config_local_prefix: string;
@@ -75,6 +76,7 @@ declare module '$env/static/private' {
 	export const LS_COLORS: string;
 	export const XDG_CURRENT_DESKTOP: string;
 	export const npm_package_version: string;
+	export const MEMORY_PRESSURE_WATCH: string;
 	export const XDG_SEAT_PATH: string;
 	export const PERL5LIB: string;
 	export const INVOCATION_ID: string;
@@ -183,6 +185,7 @@ declare module '$env/dynamic/private' {
 		LC_NAME: string;
 		SSH_AUTH_SOCK: string;
 		P9K_TTY: string;
+		MEMORY_PRESSURE_WRITE: string;
 		TERM_SESSION_ID: string;
 		COLOR: string;
 		npm_config_local_prefix: string;
@@ -213,6 +216,7 @@ declare module '$env/dynamic/private' {
 		LS_COLORS: string;
 		XDG_CURRENT_DESKTOP: string;
 		npm_package_version: string;
+		MEMORY_PRESSURE_WATCH: string;
 		XDG_SEAT_PATH: string;
 		PERL5LIB: string;
 		INVOCATION_ID: string;

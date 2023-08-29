@@ -61,7 +61,7 @@ public class PartnershipService {
         partnershipDAO.insertPartnership(partnership);
     }
 
-    public void updateParthenship(UpdatePartnership updatePartnership) {
+    public void updatePartnership(UpdatePartnership updatePartnership) {
         Integer partnershipId = updatePartnership.partnershipId();
 
         Partnership partnership = partnershipDAO.selectPartnershipById(partnershipId).

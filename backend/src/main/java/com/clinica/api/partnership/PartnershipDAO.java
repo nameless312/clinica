@@ -1,7 +1,5 @@
 package com.clinica.api.partnership;
 
-import com.clinica.api.marketing.Marketing;
-
 import java.util.List;
 import java.util.Optional;
 
