@@ -1,21 +1,12 @@
-package com.clinica.api.concelho;
+package com.clinica.api.address.concelho;
 
-import com.clinica.api.exceptions.ResourceNotFoundException;
-import com.clinica.api.marketing.Marketing;
-import com.clinica.api.marketing.MarketingDAO;
-import com.clinica.api.marketing.MarketingDTO;
-import com.clinica.api.marketing.input.NewMarketingChannel;
-import com.clinica.api.marketing.input.UpdateMarketingChannel;
-import com.clinica.api.user.User;
 import com.clinica.api.user.UserDAO;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.time.Clock;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,12 +1,12 @@
 package com.clinica.api.Procedure;
 
 import com.clinica.api.exceptions.ResourceNotFoundException;
-import com.clinica.api.procedures.Procedure;
-import com.clinica.api.procedures.ProcedureDAO;
-import com.clinica.api.procedures.ProcedureDTO;
-import com.clinica.api.procedures.ProcedureService;
-import com.clinica.api.procedures.input.NewProcedure;
-import com.clinica.api.procedures.input.UpdateProcedure;
+import com.clinica.api.procedure.Procedure;
+import com.clinica.api.procedure.ProcedureDAO;
+import com.clinica.api.procedure.ProcedureDTO;
+import com.clinica.api.procedure.ProcedureService;
+import com.clinica.api.procedure.input.NewProcedure;
+import com.clinica.api.procedure.input.UpdateProcedure;
 import com.clinica.api.user.User;
 import com.clinica.api.user.UserDAO;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +45,7 @@ class ProcedureServiceTest {
     @Test
     void selectAllProceduresEmpty() {
         // Given
-        List<com.clinica.api.procedures.Procedure> procedures = List.of();
+        List<com.clinica.api.procedure.Procedure> procedures = List.of();
 
         // When
         when(procedureDAO.selectProcedures()).thenReturn(procedures);
@@ -57,7 +57,7 @@ class ProcedureServiceTest {
     void selectAllProceduresEmptyNotEmpty() {
         // Given
         int id = 10;
-        com.clinica.api.procedures.Procedure procedure = com.clinica.api.procedures.Procedure.builder()
+        com.clinica.api.procedure.Procedure procedure = com.clinica.api.procedure.Procedure.builder()
                 .procedureId(id)
                 .dtAdded(Timestamp.from(Instant.ofEpochMilli(10000000)))
                 .dtUpdate(Timestamp.from(Instant.ofEpochMilli(10000000)))

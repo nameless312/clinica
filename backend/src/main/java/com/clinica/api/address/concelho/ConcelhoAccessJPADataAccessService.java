@@ -1,4 +1,4 @@
-package com.clinica.api.concelho;
+package com.clinica.api.address.concelho;
 
 import org.springframework.stereotype.Repository;
 

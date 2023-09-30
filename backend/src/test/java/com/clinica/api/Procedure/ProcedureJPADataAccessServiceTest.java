@@ -1,8 +1,8 @@
 package com.clinica.api.Procedure;
 
-import com.clinica.api.procedures.Procedure;
-import com.clinica.api.procedures.ProcedureAccessJPADataAccessService;
-import com.clinica.api.procedures.ProcedureRepository;
+import com.clinica.api.procedure.Procedure;
+import com.clinica.api.procedure.ProcedureAccessJPADataAccessService;
+import com.clinica.api.procedure.ProcedureRepository;
 import com.clinica.api.testcontainers.AbstractTestcontainers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

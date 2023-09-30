@@ -1,4 +1,4 @@
-package com.clinica.api.procedures.input;
+package com.clinica.api.procedure.input;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

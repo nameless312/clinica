@@ -1,4 +1,4 @@
-package com.clinica.api.district;
+package com.clinica.api.address.district;
 
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.clinica.api.procedures;
+package com.clinica.api.procedure;
 
 import com.clinica.api.user.User;
 import jakarta.persistence.*;

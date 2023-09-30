@@ -1,4 +1,4 @@
-package com.clinica.api.procedures;
+package com.clinica.api.procedure;
 
 public record ProcedureDTO(
         Integer procedureID,

@@ -1,4 +1,4 @@
-package com.clinica.api.district;
+package com.clinica.api.address.district;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

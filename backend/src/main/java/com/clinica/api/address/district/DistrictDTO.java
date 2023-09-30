@@ -1,4 +1,4 @@
-package com.clinica.api.district;
+package com.clinica.api.address.district;
 
 public record DistrictDTO(Integer districtId, String districtName) {
 }

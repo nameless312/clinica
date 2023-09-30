@@ -2,10 +2,10 @@ package com.clinica.api.helpers;
 
 import com.clinica.api.address.Address;
 import com.clinica.api.address.AddressRepository;
-import com.clinica.api.concelho.Concelho;
-import com.clinica.api.concelho.ConcelhoRepository;
-import com.clinica.api.district.District;
-import com.clinica.api.district.DistrictRepository;
+import com.clinica.api.address.concelho.Concelho;
+import com.clinica.api.address.concelho.ConcelhoRepository;
+import com.clinica.api.address.district.District;
+import com.clinica.api.address.district.DistrictRepository;
 import com.clinica.api.user.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

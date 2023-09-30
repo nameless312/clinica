@@ -1,8 +1,8 @@
-package com.clinica.api.procedures;
+package com.clinica.api.procedure;
 
 import com.clinica.api.exceptions.ResourceNotFoundException;
-import com.clinica.api.procedures.input.NewProcedure;
-import com.clinica.api.procedures.input.UpdateProcedure;
+import com.clinica.api.procedure.input.NewProcedure;
+import com.clinica.api.procedure.input.UpdateProcedure;
 import com.clinica.api.user.User;
 import com.clinica.api.user.UserDAO;
 import jakarta.transaction.Transactional;

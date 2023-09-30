@@ -1,4 +1,4 @@
-package com.clinica.api.procedures;
+package com.clinica.api.procedure;
 
 import org.springframework.stereotype.Repository;
 

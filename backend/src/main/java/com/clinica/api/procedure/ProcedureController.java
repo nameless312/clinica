@@ -1,7 +1,7 @@
-package com.clinica.api.procedures;
+package com.clinica.api.procedure;
 
-import com.clinica.api.procedures.input.NewProcedure;
-import com.clinica.api.procedures.input.UpdateProcedure;
+import com.clinica.api.procedure.input.NewProcedure;
+import com.clinica.api.procedure.input.UpdateProcedure;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

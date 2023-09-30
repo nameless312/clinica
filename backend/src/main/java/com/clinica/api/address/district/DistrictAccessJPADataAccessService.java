@@ -1,4 +1,4 @@
-package com.clinica.api.district;
+package com.clinica.api.address.district;
 
 import org.springframework.stereotype.Repository;
 
