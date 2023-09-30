@@ -1,10 +1,6 @@
-package com.clinica.api.Procedure;
+package com.clinica.api.procedure;
 
 import com.clinica.api.exceptions.ResourceNotFoundException;
-import com.clinica.api.procedure.Procedure;
-import com.clinica.api.procedure.ProcedureDAO;
-import com.clinica.api.procedure.ProcedureDTO;
-import com.clinica.api.procedure.ProcedureService;
 import com.clinica.api.procedure.input.NewProcedure;
 import com.clinica.api.procedure.input.UpdateProcedure;
 import com.clinica.api.user.User;
@@ -101,13 +97,13 @@ class ProcedureServiceTest {
         underTest.insertProcedure(request);
 
         // Then
-        ArgumentCaptor<Procedure> marketingArgumentCaptor = ArgumentCaptor.forClass(
+        ArgumentCaptor<Procedure> procedureArgumentCaptor = ArgumentCaptor.forClass(
                 Procedure.class
         );
 
-        verify(procedureDAO).insertProcedure(marketingArgumentCaptor.capture());
+        verify(procedureDAO).insertProcedure(procedureArgumentCaptor.capture());
 
-        Procedure capturedPartnership = marketingArgumentCaptor.getValue();
+        Procedure capturedPartnership = procedureArgumentCaptor.getValue();
 
         assertThat(capturedPartnership.getUser().getUserId()).isEqualTo(request.userId());
         assertThat(capturedPartnership.getProcedureDesc()).isEqualTo(request.procedureDesc());

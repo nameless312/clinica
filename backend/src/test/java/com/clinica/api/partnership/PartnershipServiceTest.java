@@ -1,10 +1,6 @@
-package com.clinica.api.Partnership;
+package com.clinica.api.partnership;
 
 import com.clinica.api.exceptions.ResourceNotFoundException;
-import com.clinica.api.partnership.Partnership;
-import com.clinica.api.partnership.PartnershipDAO;
-import com.clinica.api.partnership.PartnershipDTO;
-import com.clinica.api.partnership.PartnershipService;
 import com.clinica.api.partnership.input.NewPartnership;
 import com.clinica.api.partnership.input.UpdatePartnership;
 import com.clinica.api.user.User;
@@ -104,13 +100,13 @@ class PartnershipServiceTest {
         underTest.insertPartnership(request);
 
         // Then
-        ArgumentCaptor<Partnership> marketingArgumentCaptor = ArgumentCaptor.forClass(
+        ArgumentCaptor<Partnership> partnershipArgumentCaptor = ArgumentCaptor.forClass(
                 Partnership.class
         );
 
-        verify(partnershipDAO).insertPartnership(marketingArgumentCaptor.capture());
+        verify(partnershipDAO).insertPartnership(partnershipArgumentCaptor.capture());
 
-        Partnership capturedPartnership = marketingArgumentCaptor.getValue();
+        Partnership capturedPartnership = partnershipArgumentCaptor.getValue();
 
         assertThat(capturedPartnership.getUser().getUserId()).isEqualTo(request.userId());
         assertThat(capturedPartnership.getPartner()).isEqualTo(request.partner());

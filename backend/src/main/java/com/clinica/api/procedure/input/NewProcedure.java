@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 public record NewProcedure(
         @NotNull(message = "User id must be set")
         Integer userId,
-        @NotEmpty(message = "Procedure desc cannot be blank")
+        @NotEmpty(message = "ServiceType desc cannot be blank")
         String procedureDesc
 ) {
 }
