@@ -1,12 +1,12 @@
-package com.clinica.api.procedure.input;
+package com.clinica.api.technique.input;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public record NewProcedure(
+public record NewTechniqueInput(
         @NotNull(message = "User id must be set")
         Integer userId,
-        @NotEmpty(message = "Procedure desc cannot be blank")
-        String procedureDesc
+        @NotEmpty(message = "Technique name cannot be blank")
+        String technique
 ) {
 }
