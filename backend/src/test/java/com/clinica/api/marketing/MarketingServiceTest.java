@@ -1,19 +1,8 @@
 package com.clinica.api.marketing;
 
-import com.clinica.api.address.Address;
-import com.clinica.api.address.AddressService;
-import com.clinica.api.client.Client;
-import com.clinica.api.client.ClientDAO;
-import com.clinica.api.client.ClientDTO;
-import com.clinica.api.client.ClientService;
-import com.clinica.api.client.inputs.NewClient;
-import com.clinica.api.concelho.ConcelhoDAO;
-import com.clinica.api.district.DistrictDAO;
 import com.clinica.api.exceptions.ResourceNotFoundException;
 import com.clinica.api.marketing.input.NewMarketingChannel;
 import com.clinica.api.marketing.input.UpdateMarketingChannel;
-import com.clinica.api.partnership.Partnership;
-import com.clinica.api.partnership.PartnershipDAO;
 import com.clinica.api.user.User;
 import com.clinica.api.user.UserDAO;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.sql.Timestamp;
 import java.time.Clock;
 import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

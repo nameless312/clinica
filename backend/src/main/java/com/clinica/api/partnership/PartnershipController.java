@@ -1,7 +1,5 @@
 package com.clinica.api.partnership;
 
-import com.clinica.api.marketing.input.NewMarketingChannel;
-import com.clinica.api.marketing.input.UpdateMarketingChannel;
 import com.clinica.api.partnership.input.NewPartnership;
 import com.clinica.api.partnership.input.UpdatePartnership;
 import jakarta.transaction.Transactional;
@@ -28,20 +26,20 @@ public class PartnershipController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PartnershipDTO>> getMarketingChannels(Authentication authentication) {
+    public ResponseEntity<List<PartnershipDTO>> getPartnerships(Authentication authentication) {
         return ResponseEntity.ok().body(partnershipService.getAllPartnerships());
     }
 
     @PostMapping
-    public ResponseEntity<Void> insertMarketingChannel(Authentication authentication,
+    public ResponseEntity<Void> insertPartnership(Authentication authentication,
                                                        @Valid @RequestBody NewPartnership newPartnership) {
         partnershipService.insertPartnership(newPartnership);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @PutMapping
-    public ResponseEntity<Void> updateMarketingChannel(Authentication authentication,
+    public ResponseEntity<Void> updatePartnership(Authentication authentication,
                                                        @Valid @RequestBody UpdatePartnership updatePartnership) {
-        partnershipService.updateParthenship(updatePartnership);
+        partnershipService.updatePartnership(updatePartnership);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

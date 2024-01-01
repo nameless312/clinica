@@ -1,5 +1,9 @@
 package com.clinica.api.client;
 
+import com.clinica.api.client.appointments.AppointmentDTO;
+import com.clinica.api.client.appointments.AppointmentService;
+import com.clinica.api.client.appointments.input.NewAppointmentInput;
+import com.clinica.api.client.appointments.input.UpdateAppointment;
 import com.clinica.api.client.inputs.ClientUpdate;
 import com.clinica.api.client.inputs.NewClient;
 import jakarta.transaction.Transactional;
@@ -19,10 +23,12 @@ import java.util.List;
 @RequestMapping("/api/v1/client")
 public class ClientController {
     private final ClientService clientService;
+    private final AppointmentService appointmentService;
 
     @Autowired
-    public ClientController(ClientService clientService) {
+    public ClientController(ClientService clientService, AppointmentService appointmentService) {
         this.clientService = clientService;
+        this.appointmentService = appointmentService;
     }
 
     @GetMapping("/{id}")
@@ -42,6 +48,29 @@ public class ClientController {
     @PutMapping
     public ResponseEntity<Void> updateClient(Authentication authentication, @Valid @RequestBody ClientUpdate updatedClient) {
         clientService.updateClient(updatedClient);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("/appointment")
+    public ResponseEntity<List<AppointmentDTO>> getAppointments(Authentication authentication) {
+        return ResponseEntity.ok().body(appointmentService.getAllAppointments());
+    }
+
+    @GetMapping("{id}/appointment")
+    public ResponseEntity<List<AppointmentDTO>> getClientAppointments(Authentication authentication, @PathVariable Integer id) {
+        return ResponseEntity.ok().body(appointmentService.getAllAppointmentsForClient(id));
+    }
+
+    @PostMapping("/appointment")
+    public ResponseEntity<Void> insertAppointment(Authentication authentication,
+                                                       @Valid @RequestBody NewAppointmentInput newAppointmentInput) {
+        appointmentService.insertAppointment(newAppointmentInput);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    @PutMapping("/appointment")
+    public ResponseEntity<Void> updateAppointment(Authentication authentication,
+                                                  @Valid @RequestBody UpdateAppointment updateAppointment) {
+        appointmentService.updateAppointment(updateAppointment);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

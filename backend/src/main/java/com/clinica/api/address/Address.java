@@ -1,7 +1,7 @@
 package com.clinica.api.address;
 
-import com.clinica.api.concelho.Concelho;
-import com.clinica.api.district.District;
+import com.clinica.api.address.concelho.Concelho;
+import com.clinica.api.address.district.District;
 import com.clinica.api.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
